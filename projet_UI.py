@@ -6,7 +6,9 @@ import scipy as sc
 
 
 class Projet_UI(QtGui.QWidget):
-
+    '''
+    User interface class
+    '''
     def __init__(self, parent=None):
         super(Projet_UI, self).__init__()
         self.setWindowTitle("Dynamica 2017")
