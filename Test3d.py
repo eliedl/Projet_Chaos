@@ -1,3 +1,4 @@
+__author__ = 'Charles'
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -22,37 +23,34 @@ sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import matplotlib as mpl
+from mpl_toolkits.mplot3d import Axes3D
+import mpl_toolkits.mplot3d.axes3d as p3
 
 Acc_11 = sol[:,0]
 Acc_12 = sol[:,1]
-Acc_21 = sol_1[:,0]
-Acc_22 = sol_1[:,1]
+Acc_13 = sol[:,2]
 
 # Scatter plot
 fig = plt.figure(figsize = (5,5))
-axes = fig.add_subplot(111)
-axes.set_xlim(min(Acc_11), max(Acc_11))
-axes.set_ylim(min(Acc_12), max(Acc_12))
+ax = p3.Axes3D(fig)
+ax.set_xlim(min(Acc_11), max(Acc_11))
+ax.set_ylim(min(Acc_12), max(Acc_12))
 
-point, = axes.plot([Acc_11[0]],[Acc_12[0]], 'go')
-point_1, =axes.plot([Acc_21[0]],[Acc_22[0]], 'go')
-
+point, = ax.plot([Acc_11[0]],[Acc_12[0]],sol[0,2], 'go')
 
 def ani(coords):
-    point.set_data([coords[0]],[coords[1]])
-    return point
-
-def ani_1(coords):
-    point_1.set_data([coords[0]],[coords[1]])
+    print(coords)
+    point.set_data([coords[0]],[coords[1]],[coords[2]])
+    #point.sed_3d_properties([coords[0]],[coords[1]],[coords[2]])
     return point
 
 def frames():
-    for acc_11_pos, acc_12_pos in zip(Acc_11, Acc_12):
-        yield acc_11_pos, acc_12_pos
-plt.plot(sol[:,0], sol[:,1],lw = 0.1)
+    for acc_11_pos, acc_12_pos, acc_13_pos in zip(Acc_11, Acc_12, Acc_13):
+        yield acc_11_pos, acc_12_pos, acc_13_pos
 
-ani = FuncAnimation(fig, ani, frames=frames, interval=1)
-ani_1 = FuncAnimation(fig, ani_1, frames=frames, interval=1)
+plt.plot(sol[:,0], sol[:,1],sol[:,2],lw = 0.1)
 
+ani = FuncAnimation(fig, ani, frames=frames, interval=10)
 
 plt.show()

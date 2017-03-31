@@ -2,6 +2,7 @@ import numpy as np
 import scipy as sc
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+from matplotlib import animation
 
 def f(t, y, sigma, rho, beta):
     return [sigma*(y[1] - y[0]), rho*y[0] - y[1] - y[0]*y[2], y[0]*y[1] - beta*y[2]]
@@ -58,5 +59,6 @@ y = sol[:, 1]
 z = sol[:, 2]
 ax.plot(x, y, z, label='Lorentz attractor')
 ax.legend()
+
 
 plt.show()
