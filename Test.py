@@ -34,20 +34,31 @@ axes = fig.add_subplot(111)
 axes.set_xlim(min(Acc_11), max(Acc_11))
 axes.set_ylim(min(Acc_12), max(Acc_12))
 
-point, = axes.plot([Acc_11[0]],[Acc_12[0]], 'go')
-point_1, =axes.plot([Acc_21[0]],[Acc_22[0]], 'go')
+point, = axes.plot([Acc_11[0]],[Acc_12[0]], 'bo')
+point_1, =axes.plot([Acc_21[0]],[Acc_22[0]], 'ro')
+line, = axes.plot([],[], lw=0.3, color ='blue')
+line_1, = axes.plot([],[], lw=0.3, color ='red')
+
+trainee, = axes.plot([],[], lw=1, color ='blue')
+trainee_1, = axes.plot([],[], lw=1, color ='red')
 
 
 def ani(i):
+
+    line.set_data(sol[:i,0],sol[:i,1])
+    trainee.set_data(sol[i-10:i+1,0],sol[i-10:i+1,1])
+
+    line_1.set_data(sol_1[:i,0],sol_1[:i,1])
+    trainee_1.set_data(sol_1[i-10:i+1,0],sol_1[i-10:i+1,1])
+
     point.set_data(Acc_11[i],Acc_12[i])
     point_1.set_data(Acc_21[i],Acc_22[i])
-    return point
+    return point, line, point_1, line_1
 
 
 
 
-plt.plot(sol[:,0], sol[:,1],lw = 0.1)
-
+plt.plot(sol[:,0], sol[:,1], '--',lw = 0.2, color = 'lime')
 ani = FuncAnimation(fig, ani, frames=5000, interval=1)
 
 
