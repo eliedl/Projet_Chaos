@@ -4,7 +4,8 @@ import matplotlib as mpl
 import numpy as np
 import scipy as sc
 from unicodedata import *
-
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
+from mpl_toolkits.mplot3d import axes3d
 
 class Projet_UI(QtGui.QWidget):
     '''
@@ -41,10 +42,19 @@ class Projet_UI(QtGui.QWidget):
         self.x_i_edit= QtGui.QLineEdit()
         self.y_i_edit= QtGui.QLineEdit()
         self.z_i_edit= QtGui.QLineEdit()
-        self.sigma_edit= QtGui.QLineEdit()
-        self.rho_edit = QtGui.QLineEdit()
-        self.beta_edit= QtGui.QLineEdit()
+        self.sigma_edit= QtGui.QLineEdit('10')
+        self.rho_edit = QtGui.QLineEdit('28')
+        self.beta_edit= QtGui.QLineEdit('8/3')
 
+        self.x_edit.setFixedWidth(80)
+        self.y_edit.setFixedWidth(80)
+        self.z_edit.setFixedWidth(80)
+        self.x_i_edit.setFixedWidth(80)
+        self.y_i_edit.setFixedWidth(80)
+        self.z_i_edit.setFixedWidth(80)
+        self.sigma_edit.setFixedWidth(80)
+        self.rho_edit.setFixedWidth(80)
+        self.beta_edit.setFixedWidth(80)
 
         #--- ComboBox ---#
         self.model_combo = QtGui.QComboBox()
@@ -52,6 +62,16 @@ class Projet_UI(QtGui.QWidget):
         models = ['Lorentz', '-']
 
         self.model_combo.addItems(models)
+
+        # ------ Creation of the Manager for the Spectra figure -------#
+        self.simulationsFig = SimulationsFig(self)
+        self.simulationstool = NavigationToolbar2QT(self.simulationsFig, self)
+        self.simulationsmanager = QtGui.QWidget()
+        simulationsmanagergrid = QtGui.QGridLayout()
+        simulationsmanagergrid.addWidget(self.simulationstool, 0, 0, 1, 6)
+        simulationsmanagergrid.addWidget(self.simulationsFig, 1, 0, 1, 6)
+        simulationsmanagergrid.setColumnStretch(1, 100)
+        self.simulationsmanager.setLayout(simulationsmanagergrid)
 
         #--- Setup GroupBox ---#
         setup_groupbox = QtGui.QGroupBox('Setup')
@@ -78,11 +98,27 @@ class Projet_UI(QtGui.QWidget):
         setup_grid.addWidget(self.rho_edit, 8, 1)
         setup_grid.addWidget(self.beta_edit, 8, 2)
         setup_groupbox.setLayout(setup_grid)
-        master_grid = QtGui.QGridLayout()
-        master_grid.addWidget(setup_groupbox)
 
+
+        master_grid = QtGui.QGridLayout()
+        master_grid.addWidget(setup_groupbox, 0, 0)
+        master_grid.addWidget(self.simulationsmanager, 0, 1, 2, 1)
+        master_grid.setColumnStretch(1, 100)
+        master_grid.setRowStretch(1, 100)
         self.setLayout(master_grid)
 
+class SimulationsFig(FigureCanvasQTAgg):
+    def __init__(self, ui):
+        fig = mpl.figure.Figure(facecolor='white')
+        super(SimulationsFig, self).__init__(fig)
+        self.ui = ui
+        self.initFig()
+
+    def initFig(self):
+        self.ax1 = self.figure.add_axes([0, 0.38, 0.5, 0.65], projection='3d')
+        self.ax2 = self.figure.add_axes([0.5, 0.38, 0.5, 0.65], projection = '3d')
+        self.ax3 = self.figure.add_axes([0.05, 0.05, 0.4, 0.3])
+        self.ax4 = self.figure.add_axes([0.55, 0.05, 0.4, 0.3])
 
 class  MyQLabel(QtGui.QLabel):
     #--- Class For Alignment ---#
