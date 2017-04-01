@@ -53,8 +53,8 @@ line_1, = axes.plot([],[], lw=0.3, color ='red')
 trainee, = axes.plot([],[], lw=1, color ='blue')
 trainee_1, = axes.plot([],[], lw=1, color ='red')
 
-def ani(i):
-
+def ani(step):
+    i = 3*step
 
     line.set_data(sol[:i,0],sol[:i,1])
     line.set_3d_properties(sol[:i,2])
@@ -77,7 +77,7 @@ def ani(i):
 
 plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
 
-ani = FuncAnimation(fig, ani, frames=5000, interval=1)
+ani = FuncAnimation(fig, ani, frames=5000, interval=15)
 
 
 plt.show()

@@ -1,4 +1,4 @@
-__author__ = 'Charles'
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -22,9 +22,36 @@ sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-
+diff = abs(sol_1[:,0] - sol[:,0])
 Acc_11 = sol[:,0]
 Acc_12 = sol[:,1]
 
 Acc_21 = sol_1[:,0]
 Acc_22 = sol_1[:,1]
+
+# Scatter plot
+fig = plt.figure(figsize = (5,5))
+axes = fig.add_subplot(111)
+axes.set_ylim(min(diff), max(diff))
+
+line, = axes.plot([Acc_11[0]],[Acc_12[0]])
+
+
+
+def ani(step):
+    i = 3*step
+
+    x = t[:i]
+    y = diff[:i]
+    line.set_data(x,y)
+
+    axes.set_xlim(t[i]-10, t[i]+1)
+    return line
+
+
+
+
+ani = FuncAnimation(fig, ani, frames=5000, interval=15)
+
+
+plt.show()
