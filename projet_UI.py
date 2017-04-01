@@ -22,6 +22,9 @@ class Projet_UI(QtGui.QWidget):
         char2 = lookup("GREEK SMALL LETTER RHO")
         char3 = lookup("GREEK SMALL LETTER BETA")
 
+        #--- Buttons ---#
+        start_btn = QtGui.QPushButton('Start')
+
         #--- Labels ---#
         attracteur_label = MyQLabel('Attracteur', 'left')
         x_label = MyQLabel('x', 'center')
@@ -97,6 +100,7 @@ class Projet_UI(QtGui.QWidget):
         setup_grid.addWidget(self.sigma_edit, 8, 0)
         setup_grid.addWidget(self.rho_edit, 8, 1)
         setup_grid.addWidget(self.beta_edit, 8, 2)
+        setup_grid.addWidget(start_btn, 9, 0, 1, 3)
         setup_groupbox.setLayout(setup_grid)
 
 
@@ -117,8 +121,17 @@ class SimulationsFig(FigureCanvasQTAgg):
     def initFig(self):
         self.ax1 = self.figure.add_axes([0, 0.38, 0.5, 0.65], projection='3d')
         self.ax2 = self.figure.add_axes([0.5, 0.38, 0.5, 0.65], projection = '3d')
-        self.ax3 = self.figure.add_axes([0.05, 0.05, 0.4, 0.3])
-        self.ax4 = self.figure.add_axes([0.55, 0.05, 0.4, 0.3])
+        self.ax3 = self.figure.add_axes([0.08, 0.08, 0.4, 0.3])
+        self.ax4 = self.figure.add_axes([0.58, 0.08, 0.4, 0.3])
+
+        self.ax3.set_xlabel('Temps')
+        self.ax3.set_ylabel('Correlation')
+
+        self.ax4.set_ylabel("$|\ x - x'\ |$")
+        self.ax4.set_xlabel('Temps')
+
+        self.ax1.view_init(elev= 15)
+        self.ax2.view_init(elev= 15)
 
 class  MyQLabel(QtGui.QLabel):
     #--- Class For Alignment ---#
@@ -137,6 +150,6 @@ if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
 
     proj_ui = Projet_UI()
-    proj_ui.show()
+    proj_ui.showMaximized()
 
     sys.exit(app.exec_())
