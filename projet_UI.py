@@ -6,6 +6,7 @@ import scipy as sc
 from unicodedata import *
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from mpl_toolkits.mplot3d import axes3d
+from projet_core import Core
 
 class Projet_UI(QtGui.QWidget):
     '''
@@ -15,6 +16,41 @@ class Projet_UI(QtGui.QWidget):
         super(Projet_UI, self).__init__()
         self.setWindowTitle("Dynamica 2017")
         self.init_UI()
+        self.core = Core()
+
+    def update_core(self):
+
+        x = float(self.x_edit.text())
+        y = float(self.y_edit.text())
+        z = float(self.z_edit.text())
+        x_i = float(self.x_i_edit.text())
+        y_i = float(self.y_i_edit.text())
+        z_i = float(self.z_i_edit.text())
+
+        sigma = float(self.sigma_edit.text())
+        rho = float(self.rho_edit.text())
+        beta = float(self.beta_edit.text())
+
+        t0 = float(self.t0_edit.text())
+        tf = float(self.tf_edit.text())
+        step = float(self.tf_edit.text())
+
+        self.core.attractor = self.model_combo.currentText()
+        self.core.coordinates = np.array([[x, y, z], [x_i, y_i, z_i]])
+        self.core.t = np.linspace(t0, tf, step)
+        self.core.params = np.array([[sigma, rho, beta]])
+
+        print(self.core.attractor)
+        print(self.core.coordinates)
+        print(self.core.t)
+        print(self.core.params)
+
+    def start_simulation(self):
+        self.update_core()
+        print('lol')
+        if self.core.attractor == 'Lorentz':
+            self.core.solve_lorentz()
+
 
 
     def init_UI(self):
@@ -24,6 +60,7 @@ class Projet_UI(QtGui.QWidget):
 
         #--- Buttons ---#
         start_btn = QtGui.QPushButton('Start')
+        start_btn.clicked.connect(self.update_core)
 
         #--- Labels ---#
         attracteur_label = MyQLabel('Attracteur', 'left')
@@ -37,27 +74,49 @@ class Projet_UI(QtGui.QWidget):
         rho_label = MyQLabel(char2,'center')
         beta_label =MyQLabel(char3,'center')
         parametres_label = MyQLabel('Paramètres', 'center')
+        t0_label = MyQLabel('t0', 'center')
+        tf_label = MyQLabel('tf', 'center')
+        step_label = MyQLabel('Steps', 'center' )
 
         #--- Edits ---#
-        self.x_edit = QtGui.QLineEdit()
-        self.y_edit = QtGui.QLineEdit()
-        self.z_edit = QtGui.QLineEdit()
-        self.x_i_edit= QtGui.QLineEdit()
-        self.y_i_edit= QtGui.QLineEdit()
-        self.z_i_edit= QtGui.QLineEdit()
+        self.x_edit = QtGui.QLineEdit('1')
+        self.y_edit = QtGui.QLineEdit('1')
+        self.z_edit = QtGui.QLineEdit('1')
+        self.t0_edit = QtGui.QLineEdit('1')
+        self.tf_edit = QtGui.QLineEdit('100')
+        self.step_edit = QtGui.QLineEdit('10001')
+        self.x_i_edit= QtGui.QLineEdit('1.00001')
+        self.y_i_edit= QtGui.QLineEdit('1.00001')
+        self.z_i_edit= QtGui.QLineEdit('1.00001')
         self.sigma_edit= QtGui.QLineEdit('10')
         self.rho_edit = QtGui.QLineEdit('28')
-        self.beta_edit= QtGui.QLineEdit('8/3')
+        self.beta_edit= QtGui.QLineEdit('2.67')
 
         self.x_edit.setFixedWidth(80)
         self.y_edit.setFixedWidth(80)
         self.z_edit.setFixedWidth(80)
+        self.t0_edit.setFixedWidth(80)
+        self.tf_edit.setFixedWidth(80)
+        self.step_edit.setFixedWidth(80)
         self.x_i_edit.setFixedWidth(80)
         self.y_i_edit.setFixedWidth(80)
         self.z_i_edit.setFixedWidth(80)
         self.sigma_edit.setFixedWidth(80)
         self.rho_edit.setFixedWidth(80)
         self.beta_edit.setFixedWidth(80)
+
+        self.x_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.y_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.z_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.t0_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.tf_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.step_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.x_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.y_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.z_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.sigma_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.rho_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.beta_edit.setAlignment(QtCore.Qt.AlignHCenter)
 
         #--- ComboBox ---#
         self.model_combo = QtGui.QComboBox()
@@ -93,14 +152,20 @@ class Projet_UI(QtGui.QWidget):
         setup_grid.addWidget(self.x_i_edit, 5, 0)
         setup_grid.addWidget(self.y_i_edit, 5, 1)
         setup_grid.addWidget(self.z_i_edit, 5, 2)
-        setup_grid.addWidget(parametres_label, 6, 1)
-        setup_grid.addWidget(sigma_label, 7, 0)
-        setup_grid.addWidget(rho_label, 7, 1)
-        setup_grid.addWidget(beta_label, 7, 2)
-        setup_grid.addWidget(self.sigma_edit, 8, 0)
-        setup_grid.addWidget(self.rho_edit, 8, 1)
-        setup_grid.addWidget(self.beta_edit, 8, 2)
-        setup_grid.addWidget(start_btn, 9, 0, 1, 3)
+        setup_grid.addWidget(t0_label, 6, 0)
+        setup_grid.addWidget(tf_label, 6, 1)
+        setup_grid.addWidget(step_label, 6, 2)
+        setup_grid.addWidget(self.t0_edit, 7, 0)
+        setup_grid.addWidget(self.tf_edit, 7, 1)
+        setup_grid.addWidget(self.step_edit, 7, 2)
+        setup_grid.addWidget(parametres_label, 8, 1)
+        setup_grid.addWidget(sigma_label, 9, 0)
+        setup_grid.addWidget(rho_label, 9, 1)
+        setup_grid.addWidget(beta_label, 9, 2)
+        setup_grid.addWidget(self.sigma_edit, 10, 0)
+        setup_grid.addWidget(self.rho_edit, 10, 1)
+        setup_grid.addWidget(self.beta_edit, 10, 2)
+        setup_grid.addWidget(start_btn, 11, 0, 1, 3)
         setup_groupbox.setLayout(setup_grid)
 
 

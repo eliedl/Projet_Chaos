@@ -26,7 +26,7 @@ class Core:
             sol = odeint(self.lorentz, self.coordinates[i, :], self.t, args=(self.params[0, 0], self.params[0, 1], self.params[0, 2]))
 
             if i == 0:
-                self.time_series =  sol
+                self.time_series = sol
             else:
                 self.time_series = np.hstack((self.time_series, sol))
 
