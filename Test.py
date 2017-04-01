@@ -38,21 +38,17 @@ point, = axes.plot([Acc_11[0]],[Acc_12[0]], 'go')
 point_1, =axes.plot([Acc_21[0]],[Acc_22[0]], 'go')
 
 
-def ani(coords):
-    point.set_data([coords[0]],[coords[1]])
+def ani(i):
+    point.set_data(Acc_11[i],Acc_12[i])
+    point_1.set_data(Acc_21[i],Acc_22[i])
     return point
 
-def ani_1(coords):
-    point_1.set_data([coords[0]],[coords[1]])
-    return point
 
-def frames():
-    for acc_11_pos, acc_12_pos in zip(Acc_11, Acc_12):
-        yield acc_11_pos, acc_12_pos
+
+
 plt.plot(sol[:,0], sol[:,1],lw = 0.1)
 
-ani = FuncAnimation(fig, ani, frames=frames, interval=1)
-ani_1 = FuncAnimation(fig, ani_1, frames=frames, interval=1)
+ani = FuncAnimation(fig, ani, frames=5000, interval=1)
 
 
 plt.show()
