@@ -33,25 +33,19 @@ class Projet_UI(QtGui.QWidget):
 
         t0 = float(self.t0_edit.text())
         tf = float(self.tf_edit.text())
-        step = float(self.tf_edit.text())
+        step = float(self.step_edit.text())
+
 
         self.core.attractor = self.model_combo.currentText()
         self.core.coordinates = np.array([[x, y, z], [x_i, y_i, z_i]])
         self.core.t = np.linspace(t0, tf, step)
-        self.core.params = np.array([[sigma, rho, beta]])
-
-        print(self.core.attractor)
-        print(self.core.coordinates)
         print(self.core.t)
-        print(self.core.params)
+        self.core.params = np.array([[sigma, rho, beta]])
 
     def start_simulation(self):
         self.update_core()
-        print('lol')
-        if self.core.attractor == 'Lorentz':
-            self.core.solve_lorentz()
-
-
+        self.core.solve_edo()
+        self.simulationsFig.plot_simulations()
 
     def init_UI(self):
         char1 = lookup("GREEK SMALL LETTER SIGMA")
@@ -60,7 +54,7 @@ class Projet_UI(QtGui.QWidget):
 
         #--- Buttons ---#
         start_btn = QtGui.QPushButton('Start')
-        start_btn.clicked.connect(self.update_core)
+        start_btn.clicked.connect(self.start_simulation)
 
         #--- Labels ---#
         attracteur_label = MyQLabel('Attracteur', 'left')
@@ -121,7 +115,7 @@ class Projet_UI(QtGui.QWidget):
         #--- ComboBox ---#
         self.model_combo = QtGui.QComboBox()
 
-        models = ['Lorentz', '-']
+        models = ['Lorentz', 'Roessler' ,'-']
 
         self.model_combo.addItems(models)
 
@@ -197,6 +191,18 @@ class SimulationsFig(FigureCanvasQTAgg):
 
         self.ax1.view_init(elev= 15)
         self.ax2.view_init(elev= 15)
+
+    def plot_simulations(self):
+        self.ax1.cla()
+        self.ax2.cla()
+        self.ax3.cla()
+        self.ax4.cla()
+        x = self.ui.core.time_series[:, 0]
+        y = self.ui.core.time_series[:, 1]
+        z = self.ui.core.time_series[:, 2]
+
+        self.ax1.plot(x, y, z, lw= 0.2)
+        self.draw()
 
 class  MyQLabel(QtGui.QLabel):
     #--- Class For Alignment ---#

@@ -21,28 +21,46 @@ class Core:
         dldt = [sigma*(y - x) , rho*x - y - x*z, x*y - beta*z]
         return dldt
 
-    def solve_lorentz(self):
-        for i in range(np.shape(self.coordinates)[0]):
-            sol = odeint(self.lorentz, self.coordinates[i, :], self.t, args=(self.params[0, 0], self.params[0, 1], self.params[0, 2]))
+    @staticmethod
+    def roessler(l, t, sigma, rho, beta):
+        x, y, z = l
 
-            if i == 0:
-                self.time_series = sol
-            else:
-                self.time_series = np.hstack((self.time_series, sol))
-
-            self.r_n = np.delete(self.time_series, -1, 0)
-            self.r_nn = np.delete(self.time_series, 0, 0)
+        dldt = [-y - z, x + sigma*y, rho + z*(x - beta)]
+        return dldt
 
 
+    def solve_edo(self):
+        if self.attractor == 'Lorentz':
+            for i in range(np.shape(self.coordinates)[0]):
+
+                sol = odeint(self.lorentz, self.coordinates[i, :], self.t,
+                             args=(self.params[0, 0], self.params[0, 1], self.params[0, 2]))
+
+                if i == 0:
+                    self.time_series = sol
+                else:
+                    self.time_series = np.hstack((self.time_series, sol))
+
+        if self.attractor == 'Roessler':
+            for i in range(np.shape(self.coordinates)[0]):
+
+                sol = odeint(self.roessler, self.coordinates[i, :], self.t,
+                             args=(self.params[0, 0], self.params[0, 1], self.params[0, 2]))
+                if i == 0:
+                    self.time_series = sol
+                else:
+                    self.time_series = np.hstack((self.time_series, sol))
 
 if __name__ == '__main__':
     core_1 = Core()
     core_1.coordinates = np.array([[1, 1, 1], [1+1e-5, 1+1e-5, 1+1e-5]])
-    core_1.attractor = 'Lorentz'
-    core_1.params = np.array([[10, 28, 8/3]])
+    core_1.attractor = 'Roessler'
+    core_1.params = np.array([[0.2, 0.2, 5.7]])
     core_1.t = np.linspace(1, 100, 10001)
-    core_1.solve_lorentz()
+    core_1.solve_edo()
 
+    print(np.shape(core_1.t))
+    print(np.shape(core_1.time_series))
     mpl.rcParams['legend.fontsize'] = 10
     fig = plt.figure()
     ax = fig.gca(projection='3d')
