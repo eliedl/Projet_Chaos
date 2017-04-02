@@ -44,9 +44,8 @@ class Projet_UI(QtGui.QWidget):
 
     def start_simulation(self):
         self.update_core()
-        if self.core.attractor == 'Lorentz':
-            self.core.solve_lorentz()
-            self.simulationsFig.plot_simulations()
+        self.core.solve_edo()
+        self.simulationsFig.plot_simulations()
 
     def init_UI(self):
         char1 = lookup("GREEK SMALL LETTER SIGMA")
@@ -116,7 +115,7 @@ class Projet_UI(QtGui.QWidget):
         #--- ComboBox ---#
         self.model_combo = QtGui.QComboBox()
 
-        models = ['Lorentz', '-']
+        models = ['Lorentz', 'Roessler' ,'-']
 
         self.model_combo.addItems(models)
 
