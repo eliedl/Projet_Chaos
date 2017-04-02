@@ -42,7 +42,7 @@ def animate3d(fig, axes, matrix1,matrix2):
 
     # Scatter plot
     #fig = plt.figure(figsize = (5,5))
-   # axes = p3.Axes3D(fig)
+    # axes = p3.Axes3D(fig)
     axes.set_xlim(min(Acc_11), max(Acc_11))
     axes.set_ylim(min(Acc_12), max(Acc_12))
     axes.set_zlim(min(Acc_13), max(Acc_13))

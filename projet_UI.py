@@ -1,16 +1,16 @@
 import sys
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtWidgets, QtCore
 import matplotlib as mpl
 import numpy as np
 import scipy as sc
 from unicodedata import *
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from mpl_toolkits.mplot3d import axes3d
 from projet_core import Core
 from Test3d import animate3d
 from Test_scrollgraph import scrollgraph
 
-class Projet_UI(QtGui.QWidget):
+class Projet_UI(QtWidgets.QWidget):
     '''
     User interface class
     '''
@@ -41,7 +41,6 @@ class Projet_UI(QtGui.QWidget):
         self.core.attractor = self.model_combo.currentText()
         self.core.coordinates = np.array([[x, y, z], [x_i, y_i, z_i]])
         self.core.t = np.linspace(t0, tf, step)
-        print(self.core.t)
         self.core.params = np.array([[sigma, rho, beta]])
 
     def start_simulation(self):
@@ -55,7 +54,7 @@ class Projet_UI(QtGui.QWidget):
         char3 = lookup("GREEK SMALL LETTER BETA")
 
         #--- Buttons ---#
-        start_btn = QtGui.QPushButton('Start')
+        start_btn = QtWidgets.QPushButton('Start')
         start_btn.clicked.connect(self.start_simulation)
 
         #--- Labels ---#
@@ -75,18 +74,18 @@ class Projet_UI(QtGui.QWidget):
         step_label = MyQLabel('Steps', 'center' )
 
         #--- Edits ---#
-        self.x_edit = QtGui.QLineEdit('1')
-        self.y_edit = QtGui.QLineEdit('1')
-        self.z_edit = QtGui.QLineEdit('1')
-        self.t0_edit = QtGui.QLineEdit('1')
-        self.tf_edit = QtGui.QLineEdit('100')
-        self.step_edit = QtGui.QLineEdit('10001')
-        self.x_i_edit= QtGui.QLineEdit('1.00001')
-        self.y_i_edit= QtGui.QLineEdit('1.00001')
-        self.z_i_edit= QtGui.QLineEdit('1.00001')
-        self.sigma_edit= QtGui.QLineEdit('10')
-        self.rho_edit = QtGui.QLineEdit('28')
-        self.beta_edit= QtGui.QLineEdit('2.67')
+        self.x_edit = QtWidgets.QLineEdit('1')
+        self.y_edit = QtWidgets.QLineEdit('1')
+        self.z_edit = QtWidgets.QLineEdit('1')
+        self.t0_edit = QtWidgets.QLineEdit('1')
+        self.tf_edit = QtWidgets.QLineEdit('100')
+        self.step_edit = QtWidgets.QLineEdit('10001')
+        self.x_i_edit= QtWidgets.QLineEdit('1.00001')
+        self.y_i_edit= QtWidgets.QLineEdit('1.00001')
+        self.z_i_edit= QtWidgets.QLineEdit('1.00001')
+        self.sigma_edit= QtWidgets.QLineEdit('10')
+        self.rho_edit = QtWidgets.QLineEdit('28')
+        self.beta_edit= QtWidgets.QLineEdit('2.67')
 
         self.x_edit.setFixedWidth(80)
         self.y_edit.setFixedWidth(80)
@@ -101,21 +100,21 @@ class Projet_UI(QtGui.QWidget):
         self.rho_edit.setFixedWidth(80)
         self.beta_edit.setFixedWidth(80)
 
-        self.x_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.y_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.z_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.t0_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.tf_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.step_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.x_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.y_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.z_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.sigma_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.rho_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        self.beta_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.x_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.y_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.z_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.t0_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.tf_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.step_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.x_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.y_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.z_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.sigma_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.rho_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        #self.beta_edit.setAlignment(QtCore.Qt.AlignHCenter)
 
         #--- ComboBox ---#
-        self.model_combo = QtGui.QComboBox()
+        self.model_combo = QtWidgets.QComboBox()
 
         models = ['Lorentz', 'Roessler' ,'-']
 
@@ -124,16 +123,16 @@ class Projet_UI(QtGui.QWidget):
         # ------ Creation of the Manager for the Spectra figure -------#
         self.simulationsFig = SimulationsFig(self)
         self.simulationstool = NavigationToolbar2QT(self.simulationsFig, self)
-        self.simulationsmanager = QtGui.QWidget()
-        simulationsmanagergrid = QtGui.QGridLayout()
+        self.simulationsmanager = QtWidgets.QWidget()
+        simulationsmanagergrid = QtWidgets.QGridLayout()
         simulationsmanagergrid.addWidget(self.simulationstool, 0, 0, 1, 6)
         simulationsmanagergrid.addWidget(self.simulationsFig, 1, 0, 1, 6)
         simulationsmanagergrid.setColumnStretch(1, 100)
         self.simulationsmanager.setLayout(simulationsmanagergrid)
 
         #--- Setup GroupBox ---#
-        setup_groupbox = QtGui.QGroupBox('Setup')
-        setup_grid = QtGui.QGridLayout()
+        setup_groupbox = QtWidgets.QGroupBox('Setup')
+        setup_grid = QtWidgets.QGridLayout()
         setup_grid.addWidget(attracteur_label, 0, 0, 1, 2)
         setup_grid.addWidget(self.model_combo, 1, 0, 1, 3)
         setup_grid.addWidget(x_label, 2, 0)
@@ -165,7 +164,7 @@ class Projet_UI(QtGui.QWidget):
         setup_groupbox.setLayout(setup_grid)
 
 
-        master_grid = QtGui.QGridLayout()
+        master_grid = QtWidgets.QGridLayout()
         master_grid.addWidget(setup_groupbox, 0, 0)
         master_grid.addWidget(self.simulationsmanager, 0, 1, 2, 1)
         master_grid.setColumnStretch(1, 100)
@@ -200,15 +199,10 @@ class SimulationsFig(FigureCanvasQTAgg):
         self.ax3.cla()
         self.ax4.cla()
 
-        x = self.ui.core.time_series[:, 0]
-        y = self.ui.core.time_series[:, 1]
-        z = self.ui.core.time_series[:, 2]
-
         ani_1 = animate3d(self.figure, self.ax1, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
         ani_3 = scrollgraph(self.figure, self.ax3, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
         self.draw()
-        #print(self.ui.core.time_series)
-class  MyQLabel(QtGui.QLabel):
+class  MyQLabel(QtWidgets.QLabel):
     #--- Class For Alignment ---#
     def __init__(self, label, ha='left',  parent=None):
         super(MyQLabel, self).__init__(label,parent)
@@ -222,7 +216,7 @@ class  MyQLabel(QtGui.QLabel):
 if __name__ == '__main__':
 
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     proj_ui = Projet_UI()
     proj_ui.showMaximized()
