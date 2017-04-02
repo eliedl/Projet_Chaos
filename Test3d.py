@@ -75,7 +75,7 @@ def ani(step):
 
 
 
-plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
+#plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
 
 ani = FuncAnimation(fig, ani, frames=5000, interval=15)
 

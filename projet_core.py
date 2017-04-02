@@ -43,6 +43,8 @@ if __name__ == '__main__':
     core_1.t = np.linspace(1, 100, 10001)
     core_1.solve_lorentz()
 
+    print(np.shape(core_1.t))
+    print(np.shape(core_1.time_series))
     mpl.rcParams['legend.fontsize'] = 10
     fig = plt.figure()
     ax = fig.gca(projection='3d')
