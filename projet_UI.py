@@ -197,6 +197,7 @@ class SimulationsFig(FigureCanvasQTAgg):
         self.ax2.cla()
         self.ax3.cla()
         self.ax4.cla()
+
         x = self.ui.core.time_series[:, 0]
         y = self.ui.core.time_series[:, 1]
         z = self.ui.core.time_series[:, 2]

@@ -50,7 +50,7 @@ def animate2d(matrix1, matrix2):
     axes.set_ylim(min(Acc_12), max(Acc_12))
 
     point, = axes.plot([Acc_11[0]],[Acc_12[0]], 'bo')
-    point_1, =axes.plot([Acc_21[0]],[Acc_22[0]], 'ro')
+    point_1, = axes.plot([Acc_21[0]],[Acc_22[0]], 'ro')
     line, = axes.plot([],[], lw=0.3, color ='blue')
     line_1, = axes.plot([],[], lw=0.3, color ='red')
 
