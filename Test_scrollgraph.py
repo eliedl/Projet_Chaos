@@ -17,41 +17,47 @@ t = np.linspace(1, 100, 10001)
 y0 = [0.5, 0.5, 0.5]
 y1 = [1, 0.5, 0.5]
 
-sol = odeint(pend, y0, t, args=(sigma, rho, beta))
-sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
+ssol = odeint(pend, y0, t, args=(sigma, rho, beta))
+ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-diff = abs(sol_1[:,0] - sol[:,0])
-Acc_11 = sol[:,0]
-Acc_12 = sol[:,1]
 
-Acc_21 = sol_1[:,0]
-Acc_22 = sol_1[:,1]
+def scrollgraph(matrix1, matrix2):
+    sol = matrix1
+    sol_1 = matrix2
+    diff = abs(sol_1[:,0] - sol[:,0])
+    Acc_11 = sol[:,0]
+    Acc_12 = sol[:,1]
 
-# Scatter plot
-fig = plt.figure(figsize = (5,5))
-axes = fig.add_subplot(111)
-axes.set_ylim(min(diff), max(diff))
+    Acc_21 = sol_1[:,0]
+    Acc_22 = sol_1[:,1]
 
-line, = axes.plot([Acc_11[0]],[Acc_12[0]])
+    # Scatter plot
+    fig = plt.figure(figsize = (5,5))
+    axes = fig.add_subplot(111)
+    axes.set_ylim(min(diff), max(diff))
 
-
-
-def ani(step):
-    i = 3*step
-
-    x = t[:i]
-    y = diff[:i]
-    line.set_data(x,y)
-
-    axes.set_xlim(t[i]-10, t[i]+1)
-    return line
+    line, = axes.plot([Acc_11[0]],[Acc_12[0]])
 
 
 
+    def ani(step):
+        i = 3*step
 
-ani = FuncAnimation(fig, ani, frames=5000, interval=15)
+        x = t[:i]
+        y = diff[:i]
+        line.set_data(x,y)
+
+        axes.set_xlim(t[i]-10, t[i]+1)
+        return line
 
 
-plt.show()
+
+
+    ani = FuncAnimation(fig, ani, frames=5000, interval=15)
+
+
+    plt.show()
+
+scrollgraph(ssol, ssol_1)

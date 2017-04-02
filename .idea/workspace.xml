@@ -54,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <caret line="36" column="45" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -65,8 +65,8 @@
       <file leaf-file-name="Test_scrollgraph.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test_scrollgraph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7554348">
-              <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.26630434">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -78,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/Test3d.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -570,7 +570,13 @@
       <option name="project" value="LOCAL" />
       <updated>1491081311304</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Le scrollgraph fonctionne">
+      <created>1491082373030</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1491082373030</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -615,7 +621,8 @@
     <MESSAGE value="animation dans Test, jessaye de comprendre les animations 3d dans Test3d, et je sais pas si j'ai changé dequoi das core mais j'ai essayé de rien changer" />
     <MESSAGE value="Ok je suis capable de faire les animations. Va rester a implémenter ca dans une fonction pour pouvoir animer n points avec une matrice en entrée." />
     <MESSAGE value="Trainée + j'ai commencé a checker pour le scrollgraph" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trainée + j'ai commencé a checker pour le scrollgraph" />
+    <MESSAGE value="Le scrollgraph fonctionne" />
+    <option name="LAST_COMMIT_MESSAGE" value="Le scrollgraph fonctionne" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -664,6 +671,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projet_core.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -674,28 +689,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+          <caret line="36" column="45" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
+    <entry file="file://$PROJECT_DIR$/Test3d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
@@ -704,8 +711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test_scrollgraph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7554348">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.26630434">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
