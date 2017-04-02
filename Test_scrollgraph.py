@@ -23,19 +23,15 @@ ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-def scrollgraph(matrix1, matrix2):
+def scrollgraph(fig, ax, matrix1, matrix2):
     sol = matrix1
     sol_1 = matrix2
-    diff = abs(sol_1[:,0] - sol[:,0])
+    diff = np.sqrt(abs((sol_1[:,0] - sol[:,0]))**2 + (sol_1[:,1] - sol[:,1])**2 + (sol_1[:,2] - sol[:,2])**2)
     Acc_11 = sol[:,0]
     Acc_12 = sol[:,1]
 
-    Acc_21 = sol_1[:,0]
-    Acc_22 = sol_1[:,1]
-
-    # Scatter plot
-    fig = plt.figure(figsize = (5,5))
-    axes = fig.add_subplot(111)
+    axes = ax
+    print(min(diff),max(diff))
     axes.set_ylim(min(diff), max(diff))
 
     line, = axes.plot([Acc_11[0]],[Acc_12[0]])
@@ -44,7 +40,6 @@ def scrollgraph(matrix1, matrix2):
 
     def ani(step):
         i = 3*step
-
         x = t[:i]
         y = diff[:i]
         line.set_data(x,y)
@@ -55,9 +50,14 @@ def scrollgraph(matrix1, matrix2):
 
 
 
-    ani = FuncAnimation(fig, ani, frames=5000, interval=15)
+    return  FuncAnimation(fig, ani, frames=5000, interval=30)
 
+
+if __name__ == "__main__":
+    fig = plt.figure(figsize = (5,5))
+    axes = fig.add_subplot(111)
+
+    ani = scrollgraph(fig, axes, ssol, ssol_1)
 
     plt.show()
 
-scrollgraph(ssol, ssol_1)

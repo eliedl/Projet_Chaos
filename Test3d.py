@@ -28,7 +28,7 @@ import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 import mpl_toolkits.mplot3d.axes3d as p3
 
-def animate3d(matrix1,matrix2):
+def animate3d(fig, axes, matrix1,matrix2):
     sol = matrix1
     sol_1 = matrix2
 
@@ -41,8 +41,8 @@ def animate3d(matrix1,matrix2):
     Acc_23 = sol_1[:,2]
 
     # Scatter plot
-    fig = plt.figure(figsize = (5,5))
-    axes = p3.Axes3D(fig)
+    #fig = plt.figure(figsize = (5,5))
+   # axes = p3.Axes3D(fig)
     axes.set_xlim(min(Acc_11), max(Acc_11))
     axes.set_ylim(min(Acc_12), max(Acc_12))
     axes.set_zlim(min(Acc_13), max(Acc_13))
@@ -81,9 +81,14 @@ def animate3d(matrix1,matrix2):
 
    # plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
 
-    ani = FuncAnimation(fig, ani, frames=5000, interval=15)
+    return FuncAnimation(fig, ani, frames=5000, interval=30)
 
 
     plt.show()
+if __name__ == "__main__":
+    fig = plt.figure(figsize = (5,5))
+    axes = p3.Axes3D(fig)
 
-animate3d(ssol, ssol_1)
+    ani = animate3d(fig, axes, ssol, ssol_1)
+
+    plt.show()

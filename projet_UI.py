@@ -7,6 +7,8 @@ from unicodedata import *
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from mpl_toolkits.mplot3d import axes3d
 from projet_core import Core
+from Test3d import animate3d
+from Test_scrollgraph import scrollgraph
 
 class Projet_UI(QtGui.QWidget):
     '''
@@ -202,9 +204,10 @@ class SimulationsFig(FigureCanvasQTAgg):
         y = self.ui.core.time_series[:, 1]
         z = self.ui.core.time_series[:, 2]
 
-        self.ax1.plot(x, y, z, lw= 0.2)
+        ani_1 = animate3d(self.figure, self.ax1, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
+        ani_3 = scrollgraph(self.figure, self.ax3, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
         self.draw()
-
+        #print(self.ui.core.time_series)
 class  MyQLabel(QtGui.QLabel):
     #--- Class For Alignment ---#
     def __init__(self, label, ha='left',  parent=None):
