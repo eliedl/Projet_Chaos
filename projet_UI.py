@@ -37,7 +37,6 @@ class Projet_UI(QtWidgets.QWidget):
         tf = float(self.tf_edit.text())
         step = float(self.step_edit.text())
 
-
         self.core.attractor = self.model_combo.currentText()
         self.core.coordinates = np.array([[x, y, z], [x_i, y_i, z_i]])
         self.core.t = np.linspace(t0, tf, step)
@@ -173,7 +172,7 @@ class Projet_UI(QtWidgets.QWidget):
 
 class SimulationsFig(FigureCanvasQTAgg):
     def __init__(self, ui):
-        fig = mpl.figure.Figure(facecolor='white')
+        fig = mpl.pyplot.Figure(facecolor='white')
         super(SimulationsFig, self).__init__(fig)
         self.ui = ui
         self.initFig()
@@ -199,9 +198,23 @@ class SimulationsFig(FigureCanvasQTAgg):
         self.ax3.cla()
         self.ax4.cla()
 
-        ani_1 = animate3d(self.figure, self.ax1, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
-        ani_3 = scrollgraph(self.figure, self.ax3, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
+        data = self.ui.core.time_series
+
+        r = np.sqrt(data[:, 0]**2 + data[:, 1]**2 + data[:, 2]**2)
+        r_1 = np.sqrt(data[:, 3]**2 + data[:, 4]**2 + data[:, 5]**2)
+
+        x = data[:, 0] - data[:, 3]
+        y = data[:, 1] - data[:, 4]
+        z = data[:, 2] - data[:, 5]
+
+        self.ax1.plot(data[:, 0], data[:, 1], data[:, 2], lw = 0.1)
+        self.ax2.plot(x, y, z, lw = 0.1)
+
+        #ani_1 = animate3d(self.figure, self.ax1, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
+        ani_3 = scrollgraph(self.figure, self.ax4, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
+
         self.draw()
+
 class  MyQLabel(QtWidgets.QLabel):
     #--- Class For Alignment ---#
     def __init__(self, label, ha='left',  parent=None):
