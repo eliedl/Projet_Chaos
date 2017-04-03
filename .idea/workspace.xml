@@ -27,8 +27,8 @@
       <file leaf-file-name="projet_UI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/projet_UI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
+            <state relative-caret-position="-2431">
+              <caret line="49" column="43" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="43" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -454,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491170536680</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update UI TIMER FONCTIONNE TBK">
+      <created>1491229997595</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1491229997595</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -498,7 +505,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="animation dans Test, jessaye de comprendre les animations 3d dans Test3d, et je sais pas si j'ai changé dequoi das core mais j'ai essayé de rien changer" />
     <MESSAGE value="update UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="update UI" />
+    <MESSAGE value="update UI TIMER FONCTIONNE TBK" />
+    <option name="LAST_COMMIT_MESSAGE" value="update UI TIMER FONCTIONNE TBK" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -934,8 +942,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/projet_UI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
+        <state relative-caret-position="-2431">
+          <caret line="49" column="43" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="43" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

@@ -22,7 +22,6 @@ class Projet_UI(QtWidgets.QWidget):
         self.core = Core()
         self.init_UI()
 
-
     def update_core(self):
 
         x = float(self.x_edit.text())
@@ -242,6 +241,15 @@ class MyMplCanvas(FigureCanvas):
         self.ax2 = self.figure.add_axes([0.5, 0.38, 0.5, 0.65], projection='3d')
         self.ax3 = self.figure.add_axes([0.08, 0.08, 0.4, 0.3])
         self.ax4 = self.figure.add_axes([0.58, 0.08, 0.4, 0.3])
+
+        self.ax3.set_xlabel('Temps')
+        self.ax3.set_ylabel('Correlation')
+
+        self.ax4.set_ylabel("$|\ x - x'\ |$")
+        self.ax4.set_xlabel('Temps')
+
+        self.ax1.view_init(elev=15)
+        self.ax2.view_init(elev=15)
 
     def compute_initial_figure(self):
         pass
