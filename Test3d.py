@@ -75,13 +75,13 @@ def animate3d(fig, axes, matrix1,matrix2):
 
         point_1.set_data(Acc_21[i],Acc_22[i])
         point_1.set_3d_properties(Acc_23[i])
-        return point, point_1, line, line_1
+        return point, point_1, line, line_1, trainee, trainee_1
 
 
 
    # plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
 
-    return FuncAnimation(fig, ani, frames=5000, interval=30)
+    return FuncAnimation(fig, ani, frames=5000, interval=30, blit= True)
 
 
     plt.show()

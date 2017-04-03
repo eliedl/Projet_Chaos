@@ -47,6 +47,7 @@ class Projet_UI(QtWidgets.QWidget):
     def start_simulation(self):
         self.update_core()
         self.core.solve_edo()
+        self.simulationsFig.update_figure_data()
         self.simulationsFig.timer.start(100)
 
 
@@ -165,7 +166,6 @@ class Projet_UI(QtWidgets.QWidget):
         setup_grid.addWidget(start_btn, 11, 0, 1, 3)
         setup_groupbox.setLayout(setup_grid)
 
-
         master_grid = QtWidgets.QGridLayout()
         master_grid.addWidget(setup_groupbox, 0, 0)
         master_grid.addWidget(self.simulationsmanager, 0, 1, 2, 1)
@@ -173,50 +173,6 @@ class Projet_UI(QtWidgets.QWidget):
         master_grid.setRowStretch(1, 100)
         self.setLayout(master_grid)
 
-class SimulationsFig(FigureCanvasQTAgg):
-    def __init__(self, ui):
-        fig = mpl.pyplot.Figure(facecolor='white')
-        super(SimulationsFig, self).__init__(fig)
-        self.ui = ui
-        self.initFig()
-
-    def initFig(self):
-        self.ax1 = self.figure.add_axes([0, 0.38, 0.5, 0.65], projection='3d')
-        self.ax2 = self.figure.add_axes([0.5, 0.38, 0.5, 0.65], projection = '3d')
-        self.ax3 = self.figure.add_axes([0.08, 0.08, 0.4, 0.3])
-        self.ax4 = self.figure.add_axes([0.58, 0.08, 0.4, 0.3])
-
-        self.ax3.set_xlabel('Temps')
-        self.ax3.set_ylabel('Correlation')
-
-        self.ax4.set_ylabel("$|\ x - x'\ |$")
-        self.ax4.set_xlabel('Temps')
-
-        self.ax1.view_init(elev= 15)
-        self.ax2.view_init(elev= 15)
-
-    def plot_simulations(self):
-        self.ax1.cla()
-        self.ax2.cla()
-        self.ax3.cla()
-        self.ax4.cla()
-
-        data = self.ui.core.time_series
-
-        r = np.sqrt(data[:, 0]**2 + data[:, 1]**2 + data[:, 2]**2)
-        r_1 = np.sqrt(data[:, 3]**2 + data[:, 4]**2 + data[:, 5]**2)
-
-        x = data[:, 0] - data[:, 3]
-        y = data[:, 1] - data[:, 4]
-        z = data[:, 2] - data[:, 5]
-
-        self.ax1.plot(data[:, 0], data[:, 1], data[:, 2], lw = 0.1)
-        self.ax2.plot(x, y, z, lw = 0.1)
-
-        #ani_1 = animate3d(self.figure, self.ax1, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
-        ani_3 = scrollgraph(self.figure, self.ax4, self.ui.core.time_series[:,:3], self.ui.core.time_series[:,3:])
-
-        self.draw()
 
 class MyMplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
@@ -251,6 +207,11 @@ class MyMplCanvas(FigureCanvas):
         self.ax1.view_init(elev=15)
         self.ax2.view_init(elev=15)
 
+        self.plot4, = self.ax4.plot([], [])
+        self.ax4.set_ylim([-20, 20])
+
+        self.scatter4 = self.ax4.scatter([], [])
+
     def compute_initial_figure(self):
         pass
 
@@ -262,17 +223,25 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ui = ui
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.update_figure)
+        self.i = 0
 
     def compute_initial_figure(self):
         pass
+    def update_figure_data(self):
+        self.data = self.ui.core.time_series
+        self.plot4_data = self.ui.core.time_series[:, 0] - self.ui.core.time_series[:, 3]
 
     def update_figure(self):
-        # Build a list of 4 random integers between 0 and 10 (both inclusive)
-        print('coucou')
-        l = [random.randint(0, 10) for i in range(4)]
-        self.ax3.cla()
-        self.ax3.plot([0, 1, 2, 3], l, 'r')
+
+        self.plot4.set_data(self.ui.core.t[:self.i], self.plot4_data[:self.i])
+        self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
+        self.ax4.set_xlim([self.ui.core.t[self.i]-5, self.ui.core.t[self.i]+1])
+
+        print(self.plot4_data[self.i])
+        self.i += 50
         self.draw()
+
+
 
 class  MyQLabel(QtWidgets.QLabel):
     #--- Class For Alignment ---#
