@@ -4,11 +4,13 @@ import matplotlib as mpl
 import numpy as np
 import scipy as sc
 from unicodedata import *
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT, FigureCanvas
 from mpl_toolkits.mplot3d import axes3d
 from projet_core import Core
 from Test3d import animate3d
 from Test_scrollgraph import scrollgraph
+from matplotlib.figure import Figure
+import random
 
 class Projet_UI(QtWidgets.QWidget):
     '''
@@ -17,8 +19,9 @@ class Projet_UI(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(Projet_UI, self).__init__()
         self.setWindowTitle("Dynamica 2017")
-        self.init_UI()
         self.core = Core()
+        self.init_UI()
+
 
     def update_core(self):
 
@@ -45,7 +48,8 @@ class Projet_UI(QtWidgets.QWidget):
     def start_simulation(self):
         self.update_core()
         self.core.solve_edo()
-        self.simulationsFig.plot_simulations()
+        self.simulationsFig.timer.start(100)
+
 
     def init_UI(self):
         char1 = lookup("GREEK SMALL LETTER SIGMA")
@@ -120,7 +124,7 @@ class Projet_UI(QtWidgets.QWidget):
         self.model_combo.addItems(models)
 
         # ------ Creation of the Manager for the Spectra figure -------#
-        self.simulationsFig = SimulationsFig(self)
+        self.simulationsFig = MyDynamicMplCanvas(self)
         self.simulationstool = NavigationToolbar2QT(self.simulationsFig, self)
         self.simulationsmanager = QtWidgets.QWidget()
         simulationsmanagergrid = QtWidgets.QGridLayout()
@@ -215,6 +219,53 @@ class SimulationsFig(FigureCanvasQTAgg):
 
         self.draw()
 
+class MyMplCanvas(FigureCanvas):
+    """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
+
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        super(MyMplCanvas, self).__init__(fig)
+        self.compute_initial_figure()
+
+        FigureCanvas.__init__(self, fig)
+        self.setParent(parent)
+
+        FigureCanvas.setSizePolicy(self,
+                                   QtWidgets.QSizePolicy.Expanding,
+                                   QtWidgets.QSizePolicy.Expanding)
+        FigureCanvas.updateGeometry(self)
+
+        self.initFig()
+
+    def initFig(self):
+        self.ax1 = self.figure.add_axes([0, 0.38, 0.5, 0.65], projection='3d')
+        self.ax2 = self.figure.add_axes([0.5, 0.38, 0.5, 0.65], projection='3d')
+        self.ax3 = self.figure.add_axes([0.08, 0.08, 0.4, 0.3])
+        self.ax4 = self.figure.add_axes([0.58, 0.08, 0.4, 0.3])
+
+    def compute_initial_figure(self):
+        pass
+
+class MyDynamicMplCanvas(MyMplCanvas):
+    """A canvas that updates itself every second with a new plot."""
+
+    def __init__(self, ui, *args, **kwargs):
+        MyMplCanvas.__init__(self, *args, **kwargs)
+        self.ui = ui
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(self.update_figure)
+
+    def compute_initial_figure(self):
+        pass
+
+    def update_figure(self):
+        # Build a list of 4 random integers between 0 and 10 (both inclusive)
+        print('coucou')
+        l = [random.randint(0, 10) for i in range(4)]
+        self.ax3.cla()
+        self.ax3.plot([0, 1, 2, 3], l, 'r')
+        self.draw()
+
 class  MyQLabel(QtWidgets.QLabel):
     #--- Class For Alignment ---#
     def __init__(self, label, ha='left',  parent=None):
@@ -234,4 +285,21 @@ if __name__ == '__main__':
     proj_ui = Projet_UI()
     proj_ui.showMaximized()
 
-    sys.exit(app.exec_())
+    sys._excepthook = sys.excepthook
+
+
+    def my_exception_hook(exctype, value, traceback):
+        # Print the error and traceback
+        print(exctype, value, traceback)
+        # Call the normal Exception hook after
+        sys._excepthook(exctype, value, traceback)
+        sys.exit(1)
+
+
+    # Set the exception hook to our wrapping function
+    sys.excepthook = my_exception_hook
+
+    try:
+        sys.exit(app.exec_())
+    except:
+        print("Exiting")
