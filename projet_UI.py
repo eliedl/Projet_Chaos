@@ -48,7 +48,7 @@ class Projet_UI(QtWidgets.QWidget):
         self.update_core()
         self.core.solve_edo()
         self.simulationsFig.update_figure_data()
-        self.simulationsFig.timer.start(100)
+        self.simulationsFig.timer.start(30)
 
 
     def init_UI(self):
@@ -175,12 +175,10 @@ class Projet_UI(QtWidgets.QWidget):
 
 
 class MyMplCanvas(FigureCanvas):
-    """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         super(MyMplCanvas, self).__init__(fig)
-        self.compute_initial_figure()
 
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
@@ -201,22 +199,26 @@ class MyMplCanvas(FigureCanvas):
         self.ax3.set_xlabel('Temps')
         self.ax3.set_ylabel('Correlation')
 
-        self.ax4.set_ylabel("$|\ x - x'\ |$")
+        self.ax4.set_ylabel("$|\ r - r'\ |$")
         self.ax4.set_xlabel('Temps')
 
         self.ax1.view_init(elev=15)
         self.ax2.view_init(elev=15)
 
-        self.plot4, = self.ax4.plot([], [])
-        self.ax4.set_ylim([-20, 20])
+        self.plot1, = self.ax1.plot([], [], [], 'b', lw= 0.3)
+        self.plot1_i, = self.ax1.plot([], [], [], 'r', lw= 0.3)
+
+        self.trainee_1, = self.ax1.plot([], [], [], c='blue')
+        self.trainee_1_i, = self.ax1.plot([], [], [], c= 'red')
+
+        self.point1, = self.ax1.plot([], [], [], 'bo')
+        self.point1_i, = self.ax1.plot([], [], [], 'ro')
+
+        self.plot4, = self.ax4.plot([], [], lw= 0.3)
 
         self.scatter4 = self.ax4.scatter([], [])
 
-    def compute_initial_figure(self):
-        pass
-
 class MyDynamicMplCanvas(MyMplCanvas):
-    """A canvas that updates itself every second with a new plot."""
 
     def __init__(self, ui, *args, **kwargs):
         MyMplCanvas.__init__(self, *args, **kwargs)
@@ -225,23 +227,69 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.timer.timeout.connect(self.update_figure)
         self.i = 0
 
-    def compute_initial_figure(self):
-        pass
     def update_figure_data(self):
+
         self.data = self.ui.core.time_series
-        self.plot4_data = self.ui.core.time_series[:, 0] - self.ui.core.time_series[:, 3]
+        self.plot4_data = np.abs(np.sqrt(self.ui.core.time_series[:, 0]**2
+                                + self.ui.core.time_series[:, 1]**2
+                                + self.ui.core.time_series[:, 2]**2) - np.sqrt(self.ui.core.time_series[:, 3]**2
+                                                                             + self.ui.core.time_series[:, 4]**2
+                                                                             + self.ui.core.time_series[:, 5]**2))
+
+        Acc_11 = self.data[:, 0]
+        Acc_12 = self.data[:, 1]
+        Acc_13 = self.data[:, 2]
+
+        self.ax1.set_xlim3d(min(Acc_11), max(Acc_11))
+        self.ax1.set_ylim3d(min(Acc_12), max(Acc_12))
+        self.ax1.set_zlim3d(min(Acc_13), max(Acc_13))
+
+        self.ax4.set_ylim([-1, max(self.plot4_data)])
+        self.ax4.set_xlim([0, 101])
+
+        self.background1 = self.copy_from_bbox(self.ax1.bbox)
+        self.background2 = self.copy_from_bbox(self.ax2.bbox)
+        self.background3 = self.copy_from_bbox(self.ax3.bbox)
+        self.background4 = self.copy_from_bbox(self.ax4.bbox)
+
+        self.draw()
 
     def update_figure(self):
 
-        self.plot4.set_data(self.ui.core.t[:self.i], self.plot4_data[:self.i])
-        self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
-        self.ax4.set_xlim([self.ui.core.t[self.i]-5, self.ui.core.t[self.i]+1])
+        i = self.i
+        step = 9
+        #self.restore_region(self.background1)
 
-        print(self.plot4_data[self.i])
-        self.i += 50
-        self.draw()
+        #======
+        # ax1's animation
+        #======
 
+        #self.restore_region(self.background1)
 
+        self.plot1.set_data(self.data[:i,0],self.data[:i,1])
+        self.plot1.set_3d_properties(self.data[:i,2])
+
+        self.trainee_1.set_data(self.data[i-10:i+1,0],self.data[i-10:i+1,1])
+        self.trainee_1.set_3d_properties(self.data[i-10:i+1,2])
+
+        self.point1.set_data(self.data[i, 0], self.data[i, 1])
+        self.point1.set_3d_properties(self.data[i, 2])
+
+        #======
+        # ax4's animation
+        #======
+        self.plot4.set_data(self.ui.core.t[self.i - step:self.i], self.plot4_data[self.i - step:self.i])
+        #self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
+
+        self.ax4.draw_artist(self.plot4)
+
+        self.ax1.draw_artist(self.plot1)
+        self.ax1.draw_artist(self.point1)
+        self.ax1.draw_artist(self.trainee_1)
+
+        self.update()
+
+        self.i += step - 1
 
 class  MyQLabel(QtWidgets.QLabel):
     #--- Class For Alignment ---#
