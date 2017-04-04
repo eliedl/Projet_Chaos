@@ -214,7 +214,7 @@ class MyMplCanvas(FigureCanvas):
         self.point1, = self.ax1.plot([], [], [], 'bo')
         self.point1_i, = self.ax1.plot([], [], [], 'ro')
 
-        self.plot4, = self.ax4.plot([], [], lw= 0.3)
+        self.plot4, = self.ax4.plot([], [], lw= 0.1)
 
         self.scatter4 = self.ax4.scatter([], [])
 
@@ -275,10 +275,19 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.point1.set_data(self.data[i, 0], self.data[i, 1])
         self.point1.set_3d_properties(self.data[i, 2])
 
+        self.plot1_i.set_data(self.data[:i, 3], self.data[:i, 4])
+        self.plot1_i.set_3d_properties(self.data[:i, 5])
+
+        self.trainee_1_i.set_data(self.data[i - 10:i + 1, 3], self.data[i - 10:i + 1, 4])
+        self.trainee_1_i.set_3d_properties(self.data[i - 10:i + 1, 5])
+
+        self.point1_i.set_data(self.data[i, 3], self.data[i, 4])
+        self.point1_i.set_3d_properties(self.data[i, 5])
+
         #======
         # ax4's animation
         #======
-        self.plot4.set_data(self.ui.core.t[self.i - step:self.i], self.plot4_data[self.i - step:self.i])
+        self.plot4.set_data(self.ui.core.t[:self.i], self.plot4_data[:self.i])
         #self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
 
         self.ax4.draw_artist(self.plot4)
@@ -286,6 +295,9 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax1.draw_artist(self.plot1)
         self.ax1.draw_artist(self.point1)
         self.ax1.draw_artist(self.trainee_1)
+        renderer = self.get_renderer()
+        self.ax1.draw(renderer)
+
 
         self.update()
 
