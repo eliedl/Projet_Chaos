@@ -30,7 +30,7 @@ class Core:
 
 
     def solve_edo(self):
-        if self.attractor == 'Lorentz':
+        if self.attractor == 'Lorenz':
             for i in range(np.shape(self.coordinates)[0]):
 
                 sol = odeint(self.lorentz, self.coordinates[i, :], self.t,

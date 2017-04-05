@@ -50,6 +50,17 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.update_figure_data()
         self.simulationsFig.timer.start(30)
 
+    def update_edits(self):
+
+        if self.model_combo.currentText() == 'Lorenz':
+            self.sigma_edit.setText('10')
+            self.rho_edit.setText('28')
+            self.beta_edit.setText('2.67')
+
+        if self.model_combo.currentText() == 'Roessler':
+            self.sigma_edit.setText('0.2')
+            self.rho_edit.setText('0.2')
+            self.beta_edit.setText('14')
 
     def init_UI(self):
         char1 = lookup("GREEK SMALL LETTER SIGMA")
@@ -103,25 +114,27 @@ class Projet_UI(QtWidgets.QWidget):
         self.rho_edit.setFixedWidth(80)
         self.beta_edit.setFixedWidth(80)
 
-        #self.x_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.y_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.z_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.t0_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.tf_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.step_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.x_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.y_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.z_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.sigma_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.rho_edit.setAlignment(QtCore.Qt.AlignHCenter)
-        #self.beta_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.x_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.y_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.z_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.t0_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.tf_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.step_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.x_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.y_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.z_i_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.sigma_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.rho_edit.setAlignment(QtCore.Qt.AlignHCenter)
+        self.beta_edit.setAlignment(QtCore.Qt.AlignHCenter)
 
         #--- ComboBox ---#
         self.model_combo = QtWidgets.QComboBox()
 
-        models = ['Lorentz', 'Roessler' ,'-']
+        models = ['Lorenz', 'Roessler' ,'-']
 
         self.model_combo.addItems(models)
+
+        self.model_combo.currentIndexChanged.connect(self.update_edits)
 
         # ------ Creation of the Manager for the Spectra figure -------#
         self.simulationsFig = MyDynamicMplCanvas(self)
@@ -214,7 +227,7 @@ class MyMplCanvas(FigureCanvas):
         self.point1, = self.ax1.plot([], [], [], 'bo')
         self.point1_i, = self.ax1.plot([], [], [], 'ro')
 
-        self.plot4, = self.ax4.plot([], [], lw= 0.1)
+        self.plot4, = self.ax4.plot([], [], lw= 0.3)
 
         self.scatter4 = self.ax4.scatter([], [])
 
@@ -258,7 +271,11 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
         i = self.i
         step = 9
-        #self.restore_region(self.background1)
+
+        if self.i > np.shape(self.data)[0] - step:
+            self.i = 0
+            self.ax4.cla()
+            self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
         #======
         # ax1's animation
@@ -287,7 +304,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
         #======
         # ax4's animation
         #======
-        self.plot4.set_data(self.ui.core.t[:self.i], self.plot4_data[:self.i])
+        self.restore_region(self.background4)
+        self.plot4.set_data(self.ui.core.t[self.i - step:self.i], self.plot4_data[self.i - step:self.i])
         #self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
 
         self.ax4.draw_artist(self.plot4)
@@ -295,11 +313,16 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax1.draw_artist(self.plot1)
         self.ax1.draw_artist(self.point1)
         self.ax1.draw_artist(self.trainee_1)
+
+        self.background4 = self.copy_from_bbox(self.ax4.bbox)
+
+
         renderer = self.get_renderer()
         self.ax1.draw(renderer)
 
-
         self.update()
+
+
 
         self.i += step - 1
 
