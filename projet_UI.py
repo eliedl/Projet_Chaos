@@ -227,6 +227,9 @@ class MyMplCanvas(FigureCanvas):
         self.point1, = self.ax1.plot([], [], [], 'bo')
         self.point1_i, = self.ax1.plot([], [], [], 'ro')
 
+        self.plot2, = self.ax2.plot([], [], [], 'g', lw= 0.3)
+        self.point2, = self.ax2.plot([], [], [], 'go')
+
         self.plot4, = self.ax4.plot([], [], lw= 0.3)
 
         self.scatter4 = self.ax4.scatter([], [])
@@ -249,6 +252,13 @@ class MyDynamicMplCanvas(MyMplCanvas):
                                                                              + self.ui.core.time_series[:, 4]**2
                                                                              + self.ui.core.time_series[:, 5]**2))
 
+        delta_x = self.data[:, 0] - self.data[:, 3]
+        delta_y = self.data[:, 0] - self.data[:, 3]
+        delta_z = self.data[:, 0] - self.data[:, 3]
+        self.plot2_xdata = np.abs(delta_x)/max(delta_x)
+        self.plot2_ydata = np.abs(delta_y)/max(delta_y)
+        self.plot2_zdata = np.abs(delta_z)/max(delta_z)
+
         Acc_11 = self.data[:, 0]
         Acc_12 = self.data[:, 1]
         Acc_13 = self.data[:, 2]
@@ -265,6 +275,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.background3 = self.copy_from_bbox(self.ax3.bbox)
         self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
+        self.blank_background = self.copy_from_bbox(self.ax4.bbox)
         self.draw()
 
     def update_figure(self):
@@ -274,8 +285,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
         if self.i > np.shape(self.data)[0] - step:
             self.i = 0
-            self.ax4.cla()
-            self.background4 = self.copy_from_bbox(self.ax4.bbox)
+            self.background4 = self.blank_background
 
         #======
         # ax1's animation
@@ -302,6 +312,15 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.point1_i.set_3d_properties(self.data[i, 5])
 
         #======
+        # ax2's animation
+        #======
+
+        self.plot2.set_data(self.plot2_xdata[:i], self.plot2_ydata[:i])
+        self.plot2.set_3d_properties(self.plot2_zdata[:i])
+        self.point2.set_data(self.plot2_xdata[i], self.plot2_ydata[i])
+        self.point2.set_3d_properties(self.plot2_zdata[i])
+
+        #======
         # ax4's animation
         #======
         self.restore_region(self.background4)
@@ -314,11 +333,14 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax1.draw_artist(self.point1)
         self.ax1.draw_artist(self.trainee_1)
 
-        self.background4 = self.copy_from_bbox(self.ax4.bbox)
+        self.ax2.draw_artist(self.plot2)
+        self.ax2.draw_artist(self.point2)
 
+        self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
         renderer = self.get_renderer()
         self.ax1.draw(renderer)
+        self.ax2.draw(renderer)
 
         self.update()
 
