@@ -50,11 +50,11 @@ def scrollgraph(fig, ax, matrix1, matrix2):
 
 
 
-    return  FuncAnimation(fig, ani, frames=5000, interval=30)
+    return  FuncAnimation(fig, ani, frames=5000, interval=50)
 
 
 if __name__ == "__main__":
-    fig = plt.figure(figsize = (5,5))
+    fig = plt.figure()
     axes = fig.add_subplot(111)
 
     ani = scrollgraph(fig, axes, ssol, ssol_1)

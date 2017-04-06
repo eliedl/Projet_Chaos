@@ -14,8 +14,8 @@ def pend(l, t, sigma, rho, beta):
 
 sigma, rho, beta = 10, 28, 8/3
 t = np.linspace(1, 100, 10001)
-y0 = [0.5, 0.5, 0.5]
-y1 = [4, 6, 18]
+y0 = [1, 1, 1]
+y1 = [1+1e-5, 1+1e-5, 1+1e-5]
 
 ssol = odeint(pend, y0, t, args=(sigma, rho, beta))
 ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
