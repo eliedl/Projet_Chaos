@@ -31,34 +31,9 @@ def autocorr( mat, max_step):
                 somme += mat[i]*mat[i+step]
         corr.append(somme/(100))
         count += 1
-    print(corr)
     return corr
-
-def en3d(mat,tau_max):
-
-    corr = np.zeros(mat.size)
-    for i in range(1,tau_max, 100):
-        #corr[i] = autocorr(mat, i)
-        corr = np.vstack([corr, autocorr(mat, i)])
-    return corr
-
-#def plot3d(mat):
-#    corr = en3d(sol[:,1],1000)#
-#
-#    hf = plt.figure()#
-#
-#    ha = hf.add_subplot(111, projection='3d')#
-#
-#    x = np.arange(0,10001)
-#    y = np.arange(0,100)
-#
-#    X, Y = np.meshgrid(x, y)  # `plot_surface` expects `x` and `y` data to be 2D
-#    ha.plot_surface(X, Y, corr)
-#
-#    plt.show()
-
 
 if __name__ == "__main__":
-    plt.plot(autocorr(sol[:,1],100))
+    plt.plot(autocorr(sol[:,1],1000))
     plt.show()
     print("done")
