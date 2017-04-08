@@ -11,14 +11,15 @@ def pend(l, t, sigma, rho, beta):
      x, y, z  = l
      dldt = [sigma*(y - x) , rho*x - y - x*z, x*y - beta*z]
      return dldt
+if __name__ == "__main__":
 
-sigma, rho, beta = 10, 28, 8/3
-t = np.linspace(1, 100, 10001)
-y0 = [1, 1, 1]
-y1 = [1+1e-5, 1+1e-5, 1+1e-5]
+    sigma, rho, beta = 10, 28, 8/3
+    t = np.linspace(1, 100, 10001)
+    y0 = [1, 1, 1]
+    y1 = [1+1e-5, 1+1e-5, 1+1e-5]
 
-ssol = odeint(pend, y0, t, args=(sigma, rho, beta))
-ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
+    ssol = odeint(pend, y0, t, args=(sigma, rho, beta))
+    ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -79,12 +80,10 @@ def animate3d(fig, axes, matrix1,matrix2):
 
 
 
-   # plt.plot(sol[:,0], sol[:,1], sol[:,2], '--',lw = 0.3, color = 'lime')
 
     return FuncAnimation(fig, ani, frames=5000, interval=30, blit= True)
 
 
-    plt.show()
 if __name__ == "__main__":
     fig = plt.figure(figsize = (5,5))
     axes = p3.Axes3D(fig)

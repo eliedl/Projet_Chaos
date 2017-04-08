@@ -15,13 +15,22 @@ def pend(l, t, sigma, rho, beta):
      dldt = [sigma*(y - x) , rho*x - y - x*z, x*y - beta*z]
      return dldt
 
-sigma, rho, beta = 10, 28, 8/3
-t = np.linspace(1, 100, 10001)
-y0 = [0.5, 0.5, 0.5]
-y1 = [1, 0.5, 0.5]
+if __name__ == "__main__":
 
-sol = odeint(pend, y0, t, args=(sigma, rho, beta))
-sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
+
+    sigma, rho, beta = 10, 28, 8/3
+    t = np.linspace(1, 100, 10001)
+    #y0 = [10 + 1e-5, 10+ 1e-5, 10+ 1e-5]
+    #y1 = [10, 10, 10]
+
+    #y0 = [-5 + 1e-2, 0.5+ 1e-2, 0.5+ 1e-2]
+    #y1 = [-5, 0.5, 0.5]
+
+    y0 = [1+ 1e-5, 1+ 1e-5, 1+ 1e-5]
+    y1 = [1+1e-10,1+1e-10,1+1e-10]
+
+    sol = odeint(pend, y0, t, args=(sigma, rho, beta))
+    sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 def cosine_similarity(mat1, mat2):
     cssim = []
@@ -40,7 +49,19 @@ def cosine_similarity(mat1, mat2):
     return cssim
 
 
+
+
 if __name__ == "__main__":
-    plt.plot(cosine_similarity(sol,sol_1))
+    sim = np.degrees(np.arccos(cosine_similarity(sol,sol_1)))
+    plt.plot(t, sim)
+    plt.title(y1)
+    count = 0
+    threshhold = 0
+    for i in sim:
+        if i >= 45:
+            threshhold = t[count]
+            break
+        count += 1
+    print("Temps de corrélation : ", threshhold," s")
     plt.show()
     print("done")

@@ -16,16 +16,16 @@ def pend(l, t, sigma, rho, beta):
 
 sigma, rho, beta = 10, 28, 8/3
 t = np.linspace(1, 100, 10001)
-y0 = [0.5, 0.5, 0.5]
+y0 = [1, 1, 1]
 y1 = [1, 0.5, 0.5]
 
 sol = odeint(pend, y0, t, args=(sigma, rho, beta))
 sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
-def autocorr( mat, max_step):
+def autocorr( mat, min_step, max_step):
     corr = []
     count = 0
-    for step in range(0,max_step):
+    for step in range(min_step,max_step):
         somme = 0
         for i in range(0,mat.size - step):
                 somme += mat[i]*mat[i+step]
@@ -33,7 +33,20 @@ def autocorr( mat, max_step):
         count += 1
     return corr
 
+
+
+
 if __name__ == "__main__":
-    plt.plot(autocorr(sol[:,1],1000))
+    def func(x,a,b,c):
+        return a*np.exp(-b*x)
+    from scipy.optimize import curve_fit
+    corr = autocorr(sol[:,1],10,50)
+    y = np.linspace(10,50,40)
+
+    popt, pcov = curve_fit(func, y, corr)
+    plt.plot(y,corr)
+    plt.plot(y, func(y, *popt))
+    print(popt[0],' * ',"e^(-",popt[1],") + ", popt[2])
+    print("Le coeff est alors: ",1/popt[1])
     plt.show()
     print("done")

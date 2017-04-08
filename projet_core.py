@@ -60,7 +60,7 @@ if __name__ == '__main__':
     core_1 = Core()
     core_1.coordinates = np.array([[20, 1, 1], [1+1e-5, 1+1e-5, 1+1e-5]])
     core_1.attractor = 'Unknown'
-    core_1.params = np.array([[100, 0.5, 0]])
+    core_1.params = np.array([[100, 30, 00]])
     core_1.t = np.linspace(1, 100, 10001)
     core_1.solve_edo()
 
