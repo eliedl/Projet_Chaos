@@ -230,8 +230,9 @@ class MyMplCanvas(FigureCanvas):
         self.point1, = self.ax1.plot([], [], [], 'bo')
         self.point1_i, = self.ax1.plot([], [], [], 'ro')
 
-        self.plot2, = self.ax2.plot([], [], 'bo', markersize= 3)
+        self.plot2, = self.ax2.plot([], [], 'bo', markersize= 4)
         self.plot2_small, = self.ax2.plot([], [], 'bo', markersize= 1)
+        self.plot2_fade, = self.ax2.plot([], [], 'bo', markersize= 1, alpha=0.1)
 
 
         self.plot4, = self.ax4.plot([], [], lw= 0.3)
@@ -327,7 +328,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
         #======
         self.restore_region(self.background2)
         self.plot2.set_data(self.r[self.i - step:i], self.r_i[self.i - step:i])
-        self.plot2_small.set_data(self.r[:i], self.r_i[:i])
+        self.plot2_small.set_data(self.r[self.i - 35*step:i], self.r_i[self.i - 35*step:i])
+        self.plot2_fade.set_data(self.r[:i], self.r_i[:i])
 
 
 
@@ -346,6 +348,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
         self.ax2.draw_artist(self.plot2)
         self.ax2.draw_artist(self.plot2_small)
+        self.ax2.draw_artist(self.plot2_fade)
 
         self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
@@ -353,8 +356,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax1.draw(renderer)
 
         self.update()
-
-
 
         self.i += step - 1
 
