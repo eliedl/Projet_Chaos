@@ -52,13 +52,13 @@ def cosine_similarity(mat1, mat2):
 
 
 if __name__ == "__main__":
-    sim = np.degrees(np.arccos(cosine_similarity(sol,sol_1)))
+    sim =(cosine_similarity(sol,sol_1))
     plt.plot(t, sim)
     plt.title(y1)
     count = 0
     threshhold = 0
     for i in sim:
-        if i >= 45:
+        if i <= 0.5:
             threshhold = t[count]
             break
         count += 1
