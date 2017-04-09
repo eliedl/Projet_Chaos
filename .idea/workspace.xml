@@ -27,8 +27,8 @@
       <file leaf-file-name="projet_UI.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/projet_UI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="234" column="68" selection-start-line="234" selection-start-column="68" selection-end-line="234" selection-end-column="68" />
+            <state relative-caret-position="2159">
+              <caret line="220" column="35" selection-start-line="220" selection-start-column="35" selection-end-line="220" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -51,8 +51,8 @@
       <file leaf-file-name="Test_cosine_similarity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+            <state relative-caret-position="479">
+              <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
               <folding>
                 <element signature="e#46#64#0" expanded="true" />
               </folding>
@@ -427,8 +427,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.projet_UI" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
         <item index="3" class="java.lang.String" itemvalue="Python.TESTESTESTES" />
         <item index="4" class="java.lang.String" itemvalue="Python.Test_Correlation" />
       </list>
@@ -546,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491751743095</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Update UI: allure de r' en fonction de r encore  plus nice">
+      <created>1491753295392</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1491753295392</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -617,7 +624,8 @@
     <MESSAGE value="corrélation et cosine" />
     <MESSAGE value="Petite optimisation le UI devrait s'initialiser 4x plus vite" />
     <MESSAGE value="Update UI: allure de r' en fonction de r plus nice et  s'update sous rotation du plot 3d," />
-    <option name="LAST_COMMIT_MESSAGE" value="Update UI: allure de r' en fonction de r plus nice et  s'update sous rotation du plot 3d," />
+    <MESSAGE value="Update UI: allure de r' en fonction de r encore  plus nice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update UI: allure de r' en fonction de r encore  plus nice" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -970,16 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
-          <folding>
-            <element signature="e#46#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TESTESTESTES.py" />
     <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -991,10 +989,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+          <folding>
+            <element signature="e#46#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projet_UI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="234" column="68" selection-start-line="234" selection-start-column="68" selection-end-line="234" selection-end-column="68" />
+        <state relative-caret-position="2159">
+          <caret line="220" column="35" selection-start-line="220" selection-start-column="35" selection-end-line="220" selection-end-column="35" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

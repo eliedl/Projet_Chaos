@@ -220,7 +220,6 @@ class MyMplCanvas(FigureCanvas):
 
         self.ax1.view_init(elev=15)
 
-
         self.plot1, = self.ax1.plot([], [], [], 'b', lw= 0.3)
         self.plot1_i, = self.ax1.plot([], [], [], 'r', lw= 0.3)
 
