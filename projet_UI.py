@@ -231,6 +231,7 @@ class MyMplCanvas(FigureCanvas):
         self.point1_i, = self.ax1.plot([], [], [], 'ro')
 
         self.plot2, = self.ax2.plot([], [], 'bo', markersize= 3)
+        self.plot2_small, = self.ax2.plot([], [], 'bo', markersize= 1)
 
 
         self.plot4, = self.ax4.plot([], [], lw= 0.3)
@@ -244,7 +245,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ui = ui
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.update_figure)
-        self.i = 9800
+        self.i = 0
 
     def update_figure_data(self):
 
@@ -257,7 +258,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
                                 + self.ui.core.time_series[:, 4]**2
                                 + self.ui.core.time_series[:, 5]**2)
 
-        self.plot2
 
         self.plot4_data = np.abs(self.r - self.r_i)
 
@@ -325,8 +325,9 @@ class MyDynamicMplCanvas(MyMplCanvas):
         #======
         # ax2's animation
         #======
-
-        self.plot2.set_data(self.r[i], self.r_i[i])
+        self.restore_region(self.background2)
+        self.plot2.set_data(self.r[self.i - step:i], self.r_i[self.i - step:i])
+        self.plot2_small.set_data(self.r[:i], self.r_i[:i])
 
 
 
@@ -344,7 +345,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax1.draw_artist(self.trainee_1)
 
         self.ax2.draw_artist(self.plot2)
-
+        self.ax2.draw_artist(self.plot2_small)
 
         self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
