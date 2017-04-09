@@ -90,15 +90,27 @@ if __name__ == "__main__":
     resolution = 5000
 
     for i in range(0,resolution,3):
-        y = [initial_values[i,0] +1e-5, initial_values[i,1]+1e-5, initial_values[i,2]+1e-5]
         mat1 = initial_values[i:]
+
+        y = [initial_values[i,0] +1e-5, initial_values[i,1], initial_values[i,2]]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
-        threshhold = calculate_threshhold(coeff,t)
+        threshhold1 = calculate_threshhold(coeff,t)
+
+        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+1e-5]
+        mat2 = generate_data(y,t[i:])
+        coeff = cosine_similarity(mat1,mat2)
+        threshhold2 = calculate_threshhold(coeff,t)
+
+        y = [initial_values[i,0] , initial_values[i,1]+1e-5, initial_values[i,2]]
+        mat2 = generate_data(y,t[i:])
+        coeff = cosine_similarity(mat1,mat2)
+        threshhold3 = calculate_threshhold(coeff,t)
+
+        threshhold = (threshhold1+threshhold2+threshhold3)/3
         local = np.array([y[0], y[1], y[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
-    #print(thresh_matrix)
 
 
     xs = thresh_matrix[:,0]
@@ -112,6 +124,6 @@ if __name__ == "__main__":
     print(c)
 
 
-    p =ax.scatter(xs, ys, zs, c=c, cmap='rainbow', marker = 'o')
+    p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)
     plt.show()

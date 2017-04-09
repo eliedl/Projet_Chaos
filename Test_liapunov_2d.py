@@ -1,6 +1,7 @@
 __author__ = 'Charles'
 __author__ = 'Charles'
 __author__ = 'Charles'
+__author__ = 'Charles'
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -70,38 +71,38 @@ if __name__ == "__main__":
                         , [(rho + sigma -Z)/2, -1, 0]
                         ,[ Y/2, 0, -beta]])
     t = np.linspace(1, 100, 10001)
-    y0 = [1,0,1]
+    y0 = [10,10,10]
     initial_values = generate_data(y0,t)
     thresh_matrix = np.zeros((1, 4))
     fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+    ax = fig.add_subplot(111)
 
-    resolution = 5000
+    resolution = 10000
 
-    for i in range(0,resolution,3):
+    for i in range(0,resolution,1):
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
         Y = pos[1]
         Z = pos[2]
         lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(Y,Z)))
         liapunov = max([lam1, lam2, lam3])
-        threshhold = liapunov
-        if liapunov < 0.2:
-            threshhold = 0
+        threshhold = 1/liapunov
+        #if liapunov < 0.2:
+         #   threshhold = 0
 
         local = np.array([pos[0], pos[1], pos[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
 
 
-    xs = thresh_matrix[:,0]
-    ys = thresh_matrix[:,1]
-    zs = thresh_matrix[:,2]
-    c = thresh_matrix[:,3]
+    xs = thresh_matrix[50:,0]
+    ys = thresh_matrix[50:,1]
+    zs = thresh_matrix[50:,2]
+    c = thresh_matrix[50:,3]
 
     print(c)
 
 
-    p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
+    p =ax.scatter(xs,zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)
     plt.show()
 
