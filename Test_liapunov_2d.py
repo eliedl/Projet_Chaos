@@ -83,9 +83,9 @@ if __name__ == "__main__":
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
         Y = pos[1]
         Z = pos[2]
-        lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(Y,Z)))
+        lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(0,Z)))
         liapunov = max([lam1, lam2, lam3])
-        threshhold = 1/liapunov
+        threshhold = liapunov
         #if liapunov < 0.2:
          #   threshhold = 0
 
@@ -93,11 +93,11 @@ if __name__ == "__main__":
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
 
-
-    xs = thresh_matrix[50:,0]
-    ys = thresh_matrix[50:,1]
-    zs = thresh_matrix[50:,2]
-    c = thresh_matrix[50:,3]
+    forget = 1000
+    xs = thresh_matrix[forget:,0]
+    ys = thresh_matrix[forget:,1]
+    zs = thresh_matrix[forget:,2]
+    c = thresh_matrix[forget:,3]
 
     print(c)
 

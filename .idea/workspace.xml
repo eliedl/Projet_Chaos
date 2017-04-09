@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae5b0a9d-2c39-4b39-810e-932d7fdd4520" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test_liapunov_2d.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_Correlation.py" afterPath="$PROJECT_DIR$/Test_Correlation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_Liapunov.py" afterPath="$PROJECT_DIR$/Test_Liapunov.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_recouvrement.py" afterPath="$PROJECT_DIR$/Test_recouvrement.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_liapunov_2d.py" afterPath="$PROJECT_DIR$/Test_liapunov_2d.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Projet_Chaos.iws" />
@@ -90,8 +87,8 @@
       <file leaf-file-name="Test_liapunov_2d.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test_liapunov_2d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55789477">
-              <caret line="86" column="42" selection-start-line="86" selection-start-column="42" selection-end-line="86" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.55263156">
+              <caret line="87" column="12" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
               <folding>
                 <element signature="e#92#110#0" expanded="true" />
               </folding>
@@ -182,8 +179,6 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="172" />
-    <option name="y" value="88" />
     <option name="width" value="960" />
     <option name="height" value="1032" />
   </component>
@@ -582,11 +577,17 @@
       <option name="project" value="LOCAL" />
       <updated>1491760359032</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="j'ai implémenté la méthode avec les matrices de lambda pour qu'on puisse comparer avec la méthode &quot;bruteforce&quot; plus tard">
+      <created>1491765905866</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1491765905866</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="172" y="88" width="960" height="1032" extended-state="0" />
+    <frame x="0" y="0" width="960" height="1032" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.391494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1039,8 +1040,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test_liapunov_2d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55789477">
-          <caret line="86" column="42" selection-start-line="86" selection-start-column="42" selection-end-line="86" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.55263156">
+          <caret line="87" column="12" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
           <folding>
             <element signature="e#92#110#0" expanded="true" />
           </folding>
