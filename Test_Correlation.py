@@ -14,13 +14,6 @@ def pend(l, t, sigma, rho, beta):
      dldt = [sigma*(y - x) , rho*x - y - x*z, x*y - beta*z]
      return dldt
 
-sigma, rho, beta = 10, 28, 8/3
-t = np.linspace(1, 100, 10001)
-y0 = [1, 1, 1]
-y1 = [1, 0.5, 0.5]
-
-sol = odeint(pend, y0, t, args=(sigma, rho, beta))
-sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
 
 def autocorr( mat, min_step, max_step):
     corr = []
@@ -37,6 +30,12 @@ def autocorr( mat, min_step, max_step):
 
 
 if __name__ == "__main__":
+    sigma, rho, beta = 10, 28, 8/3
+    t = np.linspace(1, 100, 10001)
+    y0 = [5, 5, 10]
+
+    sol = odeint(pend, y0, t, args=(sigma, rho, beta))
+
     def func(x,a,b,c):
         return a*np.exp(-b*x)
     from scipy.optimize import curve_fit
