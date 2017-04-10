@@ -100,6 +100,7 @@ if __name__ == "__main__":
 
     print(c)
 
+    np.savetxt("last_liapunov", thresh_matrix)
 
     p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)

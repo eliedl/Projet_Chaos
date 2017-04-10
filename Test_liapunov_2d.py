@@ -83,15 +83,21 @@ if __name__ == "__main__":
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
         Y = pos[1]
         Z = pos[2]
-        lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(0,Z)))
-        liapunov = max([lam1, lam2, lam3])
+        #lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(0,Z)))
+        #liapunov = max([lam1, lam2, lam3])
+        #if liapunov < 0:
+            #print(lam1," ",lam2, " ",lam3)
+
+        lam3 = (-(sigma+1) + np.sqrt((rho + sigma - Z)**2 + (sigma+1)**2))/2
+        liapunov = lam3
+
         threshhold = liapunov
-        #if liapunov < 0.2:
+        #if threshhold > 100:
          #   threshhold = 0
 
         local = np.array([pos[0], pos[1], pos[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
-        print((i * 100)//resolution)
+       #print((i * 100)//resolution)
 
     forget = 1000
     xs = thresh_matrix[forget:,0]
@@ -101,6 +107,7 @@ if __name__ == "__main__":
 
     print(c)
 
+    np.savetxt("last_liapunov_2d", thresh_matrix)
 
     p =ax.scatter(xs,zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)

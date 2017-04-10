@@ -123,6 +123,7 @@ if __name__ == "__main__":
     #    count += 1
     print(c)
 
+    np.savetxt("last_cossim_cover.txt", thresh_matrix)
 
     p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)
