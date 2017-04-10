@@ -52,7 +52,7 @@ def cosine_similarity(mat1, mat2):
         z2 = mat2[i,2]
 
         coeff = (x1*x2 + y1*y2 + z1*z2)/ (np.sqrt((x1**2 + y1**2 +z1**2 )*(x2**2 + y2**2 +z2**2 )))
-        cssim.append(coeff%1)
+        cssim.append(coeff)
     return cssim
 
 def calculate_threshhold(mat, temps):
@@ -113,10 +113,10 @@ if __name__ == "__main__":
         print((i * 100)//resolution)
 
 
-    xs = thresh_matrix[:,0]
-    ys = thresh_matrix[:,1]
-    zs = thresh_matrix[:,2]
-    c = thresh_matrix[:,3]
+    xs = thresh_matrix[1:,0]
+    ys = thresh_matrix[1:,1]
+    zs = thresh_matrix[1:,2]
+    c = thresh_matrix[1:,3]
     count = 0
     #for i in c:
     #    c[count] = np.exp(-i)

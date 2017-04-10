@@ -21,6 +21,7 @@ class Projet_UI(QtWidgets.QWidget):
         self.setWindowTitle("Dynamica 2017")
         self.core = Core()
         self.init_UI()
+        self.i = 0
 
     def update_core(self):
 
@@ -47,8 +48,33 @@ class Projet_UI(QtWidgets.QWidget):
     def start_simulation(self):
         self.update_core()
         self.core.solve_edo()
+        self.simulationsFig.i = self.i
         self.simulationsFig.update_figure_data()
         self.simulationsFig.timer.start(30)
+
+    def pause(self):
+        self.simulationsFig.timer.stop()
+        self.simulationsFig.plot2.remove()
+        self.simulationsFig.plot2_small.remove()
+        renderer = self.simulationsFig.get_renderer()
+        self.simulationsFig.ax2.draw(renderer)
+        self.i = self.simulationsFig.i
+
+    def restart(self):
+        self.simulationsFig.i = 0
+        self.update_core()
+        self.core.solve_edo()
+        self.simulationsFig.update_figure_data()
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background2)
+        self.simulationsFig.background4 = self.simulationsFig.blank_background4
+
+    def change_attractor(self):
+        self.simulationsFig.timer.stop()
+        self.update_edits()
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background2)
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
+        self.simulationsFig.i = 0
 
     def update_edits(self):
 
@@ -70,6 +96,12 @@ class Projet_UI(QtWidgets.QWidget):
         #--- Buttons ---#
         start_btn = QtWidgets.QPushButton('Start')
         start_btn.clicked.connect(self.start_simulation)
+
+        pause_btn = QtWidgets.QPushButton('Pause')
+        pause_btn.clicked.connect(self.pause)
+
+        restart_btn = QtWidgets.QPushButton('Restart')
+        restart_btn.clicked.connect(self.restart)
 
         #--- Labels ---#
         attracteur_label = MyQLabel('Attracteur', 'left')
@@ -134,7 +166,7 @@ class Projet_UI(QtWidgets.QWidget):
 
         self.model_combo.addItems(models)
 
-        self.model_combo.currentIndexChanged.connect(self.update_edits)
+        self.model_combo.currentIndexChanged.connect(self.change_attractor)
 
         # ------ Creation of the Manager for the Spectra figure -------#
         self.simulationsFig = MyDynamicMplCanvas(self)
@@ -176,7 +208,9 @@ class Projet_UI(QtWidgets.QWidget):
         setup_grid.addWidget(self.sigma_edit, 10, 0)
         setup_grid.addWidget(self.rho_edit, 10, 1)
         setup_grid.addWidget(self.beta_edit, 10, 2)
-        setup_grid.addWidget(start_btn, 11, 0, 1, 3)
+        setup_grid.addWidget(start_btn, 11, 0)
+        setup_grid.addWidget(pause_btn, 11, 1)
+        setup_grid.addWidget(restart_btn, 11, 2)
         setup_groupbox.setLayout(setup_grid)
 
         master_grid = QtWidgets.QGridLayout()
@@ -236,7 +270,6 @@ class MyMplCanvas(FigureCanvas):
 
 
         self.plot4, = self.ax4.plot([], [], lw= 0.3)
-
         self.scatter4 = self.ax4.scatter([], [])
 
 class MyDynamicMplCanvas(MyMplCanvas):
@@ -261,8 +294,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
 
         self.plot4_data = np.abs(self.r - self.r_i)
-
-
 
         Acc_11 = self.data[:, 0]
         Acc_12 = self.data[:, 1]
@@ -326,16 +357,16 @@ class MyDynamicMplCanvas(MyMplCanvas):
         #======
         # ax2's animation
         #======
+
         self.restore_region(self.background2)
         self.plot2.set_data(self.r[self.i - step:i], self.r_i[self.i - step:i])
         self.plot2_small.set_data(self.r[self.i - 35*step:i], self.r_i[self.i - 35*step:i])
         self.plot2_fade.set_data(self.r[:i], self.r_i[:i])
 
-
-
         #======
         # ax4's animation
         #======
+
         self.restore_region(self.background4)
         self.plot4.set_data(self.ui.core.t[self.i - step:self.i], self.plot4_data[self.i - step:self.i])
         #self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
