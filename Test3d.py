@@ -15,8 +15,9 @@ if __name__ == "__main__":
 
     sigma, rho, beta = 10, 28, 8/3
     t = np.linspace(1, 100, 10001)
-    y0 = [1, 1, 1]
-    y1 = [1+1e-5, 1+1e-5, 1+1e-5]
+    x = 5
+    y0 = [x, x, x]
+    y1 = [x+1e-5, x+1e-5, x+1e-5]
 
     ssol = odeint(pend, y0, t, args=(sigma, rho, beta))
     ssol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
@@ -87,7 +88,19 @@ def animate3d(fig, axes, matrix1,matrix2):
 if __name__ == "__main__":
     fig = plt.figure(figsize = (5,5))
     axes = p3.Axes3D(fig)
+    temps_f = 1300
+    temps_i = 50
+    plt.plot(ssol[temps_i:temps_f,0],ssol[temps_i:temps_f,1],ssol[temps_i:temps_f,2],lw = 0.3,c = "red")
+    plt.plot(ssol_1[temps_i:temps_f,0],ssol_1[temps_i:temps_f,1],ssol_1[temps_i:temps_f,2], lw = 0.3, c = "blue")
 
-    ani = animate3d(fig, axes, ssol, ssol_1)
+
+    plt.show()
+    fig = plt.figure(figsize = (5,5))
+    axes = p3.Axes3D(fig)
+    temps_f = 2000
+    temps_i = 1300
+    plt.plot(ssol[temps_i:temps_f,0],ssol[temps_i:temps_f,1],ssol[temps_i:temps_f,2],lw = 0.3,c = "red")
+    plt.plot(ssol_1[temps_i:temps_f,0],ssol_1[temps_i:temps_f,1],ssol_1[temps_i:temps_f,2], lw = 0.3, c = "blue")
+
 
     plt.show()

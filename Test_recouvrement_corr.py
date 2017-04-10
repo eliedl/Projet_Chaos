@@ -1,6 +1,7 @@
 __author__ = 'Charles'
 __author__ = 'Charles'
 __author__ = 'Charles'
+__author__ = 'Charles'
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -42,8 +43,7 @@ def generate_data(y0, t):
 
 def cosine_similarity(mat1, mat2):
     cssim = []
-    print(mat1.size)
-    for i in range(0,mat1.size//3 -1):
+    for i in range(0,mat1.size//3):
         x1 = mat1[i,0]
         y1 = mat1[i,1]
         z1 = mat1[i,2]
@@ -52,24 +52,8 @@ def cosine_similarity(mat1, mat2):
         y2 = mat2[i,1]
         z2 = mat2[i,2]
 
-        x1p = mat1[i+1,0]
-        y1p = mat1[i+1,1]
-        z1p = mat1[i+1,2]
-
-        x2p = mat2[i+1,0]
-        y2p = mat2[i+1,1]
-        z2p = mat2[i+1,2]
-
-        dx1 =  x1p - x1
-        dy1 =  y1p - y1
-        dz1 =  z1p - z1
-
-        dx2 =  x2p - x2
-        dy2 =  y2p - y2
-        dz2 =  z2p - z2
-
-        coeff = (dx1*dx2 + dy1*dy2 + dz1*dz2)/ (np.sqrt((dx1**2 + dy1**2 +dz1**2 )*(dx2**2 + dy2**2 +dz2**2 )))
-        cssim.append(coeff)
+        coeff = (x1*x2 + y1*y2 + z1*z2)/ (np.sqrt((x1**2 + y1**2 +z1**2 )*(x2**2 + y2**2 +z2**2 )))
+        cssim.append(coeff%1)
     return cssim
 
 def calculate_threshhold(mat, temps):
@@ -94,6 +78,27 @@ def run_one():
     plt.show()
     print("done")
 
+def autocorr( mat, min_step, max_step):
+    corr = []
+    count = 0
+    for step in range(min_step,max_step):
+        somme = 0
+        for ind in range(0,mat.size//3 - step):
+                somme += mat[ind]*mat[ind+step]
+        corr.append(somme/(100))
+        count += 1
+    return corr
+
+def fit(mat,length):
+
+    from scipy.optimize import curve_fit
+    corr = autocorr(mat,10,length)
+    y = np.linspace(10,length,length-10)
+    popt, pcov = curve_fit(func, y, corr)
+    return y, corr, popt, pcov
+
+def func(x,a,b,c):
+        return a*np.exp(-b*x)
 
 if __name__ == "__main__":
 
@@ -104,45 +109,19 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    resolution = 5000
+    resolution = 1000
 
-    for i in range(0,resolution,5):
+    for i in range(0,resolution,1):
         mat1 = initial_values[i:]
+        y = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
 
-        y = [initial_values[i,0] +1e-5, initial_values[i,1], initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold1 = calculate_threshhold(coeff,t)
+        garbage, corr, popt, pcov = fit(mat1[:,0],50)
 
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+1e-5]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold2 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1]+1e-5, initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold3 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] -1e-5, initial_values[i,1], initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold4 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-1e-5]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold5 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1]-1e-5, initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
-        threshhold6 = calculate_threshhold(coeff,t)
-
-        threshhold = (threshhold1+threshhold2+threshhold3+threshhold4+threshhold5+threshhold6)/6
+        threshhold = 1/popt[1]
         local = np.array([y[0], y[1], y[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
+
 
 
     xs = thresh_matrix[1:,0]
@@ -150,8 +129,10 @@ if __name__ == "__main__":
     zs = thresh_matrix[1:,2]
     c = thresh_matrix[1:,3]
     count = 0
-
-    #print(c)
+    #for i in c:
+    #    c[count] = np.exp(-i)
+    #    count += 1
+    print(c)
 
     np.savetxt("last_cossim_cover.txt", thresh_matrix)
 

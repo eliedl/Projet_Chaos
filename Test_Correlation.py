@@ -26,7 +26,18 @@ def autocorr( mat, min_step, max_step):
         count += 1
     return corr
 
+def fit(mat,length):
 
+    from scipy.optimize import curve_fit
+    corr = autocorr(mat,10,length)
+    y = np.linspace(10,length,length-10)
+    print(corr)
+
+    popt, pcov = curve_fit(func, y, corr)
+    return y, corr, popt, pcov
+
+def func(x,a,b,c):
+        return a*np.exp(-b*x) + c
 
 
 if __name__ == "__main__":
@@ -36,13 +47,7 @@ if __name__ == "__main__":
 
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
 
-    def func(x,a,b,c):
-        return a*np.exp(-b*x)
-    from scipy.optimize import curve_fit
-    corr = autocorr(sol[:,1],10,50)
-    y = np.linspace(10,50,40)
-
-    popt, pcov = curve_fit(func, y, corr)
+    y, corr, popt, pcov = fit(sol[:,1],50)
     plt.plot(y,corr)
     plt.plot(y, func(y, *popt))
     print(popt[0],' * ',"e^(-",popt[1],") + ", popt[2])
