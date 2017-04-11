@@ -64,21 +64,20 @@ def run_one():
 if __name__ == "__main__":
 
     sigma, rho, beta = 10, 28, 8/3
-    t = np.linspace(1, 100, 10001)
 
     lam_mat =lambda Y,Z:([[- sigma, (rho + sigma -Z)/2, Y/2]
                         , [(rho + sigma -Z)/2, -1, 0]
                         ,[ Y/2, 0, -beta]])
-    t = np.linspace(1, 100, 10001)
-    y0 = [1,0,1]
+    t = np.linspace(1, 100, 100001)
+    y0 = [1.547679936204874984e+00, 2.123422213176072049e+00, 2.018664314318483122e+01]
     initial_values = generate_data(y0,t)
     thresh_matrix = np.zeros((1, 4))
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    resolution = 5000
+    resolution = 100000
 
-    for i in range(0,resolution,3):
+    for i in range(0,resolution,1):
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
         Y = pos[1]
         Z = pos[2]
@@ -93,10 +92,10 @@ if __name__ == "__main__":
         print((i * 100)//resolution)
 
 
-    xs = thresh_matrix[:,0]
-    ys = thresh_matrix[:,1]
-    zs = thresh_matrix[:,2]
-    c = thresh_matrix[:,3]
+    xs = thresh_matrix[1:,0]
+    ys = thresh_matrix[1:,1]
+    zs = thresh_matrix[1:,2]
+    c = thresh_matrix[1:,3]
 
     print(c)
 

@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
     resolution = 5000
     espacement = 1
-    for i in range(0,resolution,10):
+    for i in range(0,resolution,1):
         mat1 = initial_values[i:]
 
         y = [initial_values[i,0] +espacement, initial_values[i,1], initial_values[i,2]]
@@ -144,10 +144,10 @@ if __name__ == "__main__":
         print((i * 100)//resolution)
 
 
-    xs = thresh_matrix[1:,0]
-    ys = thresh_matrix[1:,1]
-    zs = thresh_matrix[1:,2]
-    c = thresh_matrix[1:,3]
+    xs = thresh_matrix[50:,0]
+    ys = thresh_matrix[50:,1]
+    zs = thresh_matrix[50:,2]
+    c = thresh_matrix[50:,3]
     count = 0
 
     #print(c)

@@ -20,11 +20,8 @@ def autocorr( mat, min_step, max_step):
     count = 0
     for step in range(min_step,max_step):
         somme = 0
-        for i in range(0,mat.size//3 - step):
-                r_1 = np.sqrt(mat[i,0]**2 + mat[i,1]**2 + mat[i,2]**2)
-                r_2 = np.sqrt(mat[i+step,0]**2 + mat[i+step,1]**2 + mat[i+step,2]**2)
-
-                somme +=mat[i,0]*mat[i+step,0]
+        for i in range(0,mat.size - step):
+                somme +=mat[i]*mat[i+step]
         corr.append(somme/(100))
         count += 1
     return corr
@@ -34,13 +31,12 @@ def fit(mat,length):
     from scipy.optimize import curve_fit
     corr = autocorr(mat,10,length)
     y = np.linspace(10,length,length-10)
-    print(corr)
 
     popt, pcov = curve_fit(func, y, corr)
     return y, corr, popt, pcov
 
 def func(x,a,b,c):
-        return a*np.exp(-b*x) + c
+        return a*np.exp(-b*x)
 
 
 if __name__ == "__main__":
@@ -48,18 +44,20 @@ if __name__ == "__main__":
     t = np.linspace(1, 100, 10001)
     y0 = [1, 1, 1]
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
-    #plt.plot(autocorr(sol,10,8000))
     mat = sol
-    r_1 = np.sqrt(mat[:,0]**2 + mat[:,1]**2 + mat[:,2]**2)
-    print(np.mean(r_1))
-    plt.plot(r_1)
-    plt.show()
 
+    y1, corr1, popt1, pcov1 = fit(sol[:,0],50)
+    y2, corr2, popt2, pcov2 = fit(sol[:,1],50)
+    y3, corr3, popt3, pcov3 = fit(sol[:,2],50)
 
-    y, corr, popt, pcov = fit(sol,50)
-    plt.plot(y,corr)
-    plt.plot(y, func(y, *popt))
-    print(popt[0],' * ',"e^(-",popt[1],") + ", popt[2])
-    print("Le coeff est alors: ",1/popt[1])
+    plt.plot(corr3)
+
+    print(popt1[0],' * ',"e^(-",popt1[1],") + ", popt1[2], " avec ",1/popt1[1])
+    print(popt2[0],' * ',"e^(-",popt2[1],") + ", popt2[2], " avec ",1/popt2[1])
+    print(popt3[0],' * ',"e^(-",popt3[1],") + ", popt3[2], " avec ",1/popt3[1])
+
+    coeff = (1/popt1[1] + 1/popt2[1] + 1/popt3[1])/3
+
+    print("Le coeff est alors: ",coeff)
     plt.show()
     print("done")

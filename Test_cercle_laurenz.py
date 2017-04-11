@@ -136,7 +136,9 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    centre = [-17, -10, 42]
+    #centre = [-17, -10, 42]
+    centre = [-17, -10, 45]
+
     arrete = 12
     epaisseur = 5
     valid_matrix = points_in_circle(sol, centre, arrete, epaisseur)
@@ -156,7 +158,7 @@ if __name__ == "__main__":
     ax.set_xlim((-25, 25))
     ax.set_ylim((-35, 35))
     ax.set_zlim((5, 55))
-    ax.plot(sol[:,0] , sol[:,1], sol[:,2], lw = 0.1)
+    ax.plot(sol[:,0] , sol[:,1], sol[:,2], lw = 0.01)
     #ax.scatter(cube_corners(centre,arrete))
     anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=500, interval=30, blit=True)
