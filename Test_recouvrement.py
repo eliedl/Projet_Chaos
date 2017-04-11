@@ -42,7 +42,8 @@ def generate_data(y0, t):
 
 def cosine_similarity(mat1, mat2):
     cssim = []
-    for i in range(0,mat1.size//3):
+    print(mat1.size)
+    for i in range(0,mat1.size//3 -1):
         x1 = mat1[i,0]
         y1 = mat1[i,1]
         z1 = mat1[i,2]
@@ -51,8 +52,24 @@ def cosine_similarity(mat1, mat2):
         y2 = mat2[i,1]
         z2 = mat2[i,2]
 
-        coeff = (x1*x2 + y1*y2 + z1*z2)/ (np.sqrt((x1**2 + y1**2 +z1**2 )*(x2**2 + y2**2 +z2**2 )))
-        cssim.append(coeff%1)
+        x1p = mat1[i+1,0]
+        y1p = mat1[i+1,1]
+        z1p = mat1[i+1,2]
+
+        x2p = mat2[i+1,0]
+        y2p = mat2[i+1,1]
+        z2p = mat2[i+1,2]
+
+        dx1 =  x1p - x1
+        dy1 =  y1p - y1
+        dz1 =  z1p - z1
+
+        dx2 =  x2p - x2
+        dy2 =  y2p - y2
+        dz2 =  z2p - z2
+
+        coeff = (dx1*dx2 + dy1*dy2 + dz1*dz2)/ (np.sqrt((dx1**2 + dy1**2 +dz1**2 )*(dx2**2 + dy2**2 +dz2**2 )))
+        cssim.append(coeff)
     return cssim
 
 def calculate_threshhold(mat, temps):
@@ -89,7 +106,7 @@ if __name__ == "__main__":
 
     resolution = 5000
 
-    for i in range(0,resolution,3):
+    for i in range(0,resolution,5):
         mat1 = initial_values[i:]
 
         y = [initial_values[i,0] +1e-5, initial_values[i,1], initial_values[i,2]]
@@ -107,22 +124,36 @@ if __name__ == "__main__":
         coeff = cosine_similarity(mat1,mat2)
         threshhold3 = calculate_threshhold(coeff,t)
 
-        threshhold = (threshhold1+threshhold2+threshhold3)/3
+        y = [initial_values[i,0] -1e-5, initial_values[i,1], initial_values[i,2]]
+        mat2 = generate_data(y,t[i:])
+        coeff = cosine_similarity(mat1,mat2)
+        threshhold4 = calculate_threshhold(coeff,t)
+
+        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-1e-5]
+        mat2 = generate_data(y,t[i:])
+        coeff = cosine_similarity(mat1,mat2)
+        threshhold5 = calculate_threshhold(coeff,t)
+
+        y = [initial_values[i,0] , initial_values[i,1]-1e-5, initial_values[i,2]]
+        mat2 = generate_data(y,t[i:])
+        coeff = cosine_similarity(mat1,mat2)
+        threshhold6 = calculate_threshhold(coeff,t)
+
+        threshhold = (threshhold1+threshhold2+threshhold3+threshhold4+threshhold5+threshhold6)/6
         local = np.array([y[0], y[1], y[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
 
 
-    xs = thresh_matrix[:,0]
-    ys = thresh_matrix[:,1]
-    zs = thresh_matrix[:,2]
-    c = thresh_matrix[:,3]
+    xs = thresh_matrix[1:,0]
+    ys = thresh_matrix[1:,1]
+    zs = thresh_matrix[1:,2]
+    c = thresh_matrix[1:,3]
     count = 0
-    #for i in c:
-    #    c[count] = np.exp(-i)
-    #    count += 1
-    print(c)
 
+    #print(c)
+
+    np.savetxt("last_cossim_cover.txt", thresh_matrix)
 
     p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)
