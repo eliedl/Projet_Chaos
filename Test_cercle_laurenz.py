@@ -53,6 +53,7 @@ def isincircle(position_point, centre_cercle, rayon, epaisseur):
     yb = centre_cercle[1]
     zb = centre_cercle[2]
     valide = False
+
     if (np.abs(x-xb)**2 + np.abs(y-yb)**2 + np.abs(z-zb)**2) < rayon:
         valide = True
 
