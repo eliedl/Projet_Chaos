@@ -15,26 +15,8 @@ def pend(l, t, sigma, rho, beta):
      dldt = [sigma*(y - x) , rho*x - y - x*z, x*y - beta*z]
      return dldt
 
-if __name__ == "__main__":
-
-
-    sigma, rho, beta = 10, 28, 8/3
-    t = np.linspace(1, 100, 10001)
-    #y0 = [10 + 1e-5, 10+ 1e-5, 10+ 1e-5]
-    #y1 = [10, 10, 10]
-
-    #y0 = [-5 + 1e-2, 0.5+ 1e-2, 0.5+ 1e-2]
-    #y1 = [-5, 0.5, 0.5]
-
-    y0 = [1+ 1e-5, 1+ 1e-5, 1+ 1e-5]
-    y1 = [1+1e-10,1+1e-10,1+1e-10]
-
-    sol = odeint(pend, y0, t, args=(sigma, rho, beta))
-    sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
-
 def cosine_similarity(mat1, mat2):
     cssim = []
-    print(mat1.size)
     for i in range(0,mat1.size//3 -1):
         x1 = mat1[i,0]
         y1 = mat1[i,1]
@@ -68,6 +50,14 @@ def cosine_similarity(mat1, mat2):
 
 
 if __name__ == "__main__":
+    sigma, rho, beta = 10, 28, 8/3
+    t = np.linspace(1, 100, 10001)
+
+    y0 = [1+ 1e-5, 1+ 1e-5, 1+ 1e-5]
+    y1 = [1+1e-10,1+1e-10,1+1e-10]
+
+    sol = odeint(pend, y0, t, args=(sigma, rho, beta))
+    sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
     sim =np.degrees(np.arccos(cosine_similarity(sol,sol_1)))
     plt.plot(t[:-1], sim)
     plt.title(y1)

@@ -10,6 +10,7 @@ from projet_core import Core
 from Test3d import animate3d
 from Test_scrollgraph import scrollgraph
 from matplotlib.figure import Figure
+from Test_cosine_similarity import cosine_similarity
 import random
 
 class Projet_UI(QtWidgets.QWidget):
@@ -269,8 +270,12 @@ class MyMplCanvas(FigureCanvas):
         self.plot2_fade, = self.ax2.plot([], [], 'bo', markersize= 1, alpha=0.1)
 
 
+        self.plot3, = self.ax3.plot([], [], lw= 0.3)
         self.plot4, = self.ax4.plot([], [], lw= 0.3)
+
+        self.scatter3 = self.ax3.scatter([], [])
         self.scatter4 = self.ax4.scatter([], [])
+
 
 class MyDynamicMplCanvas(MyMplCanvas):
 
@@ -292,6 +297,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
                                 + self.ui.core.time_series[:, 4]**2
                                 + self.ui.core.time_series[:, 5]**2)
 
+        self.cossim = np.degrees(np.arccos(cosine_similarity(self.data[:,:3],self.data[:,3:])))
+
 
         self.plot4_data = np.abs(self.r - self.r_i)
 
@@ -306,6 +313,9 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax2.set_ylim([0, max(self.r_i)])
         self.ax2.set_xlim([0, max(self.r)])
 
+        self.ax3.set_ylim([-5, max(self.cossim)])
+        self.ax3.set_xlim([0, 101])
+
         self.ax4.set_ylim([-1, max(self.plot4_data)])
         self.ax4.set_xlim([0, 101])
 
@@ -315,6 +325,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.background4 = self.copy_from_bbox(self.ax4.bbox)
 
         self.blank_background4 = self.copy_from_bbox(self.ax4.bbox)
+        self.blank_background3 = self.copy_from_bbox(self.ax3.bbox)
+
         self.blank_background2 = self.copy_from_bbox(self.ax2.bbox)
         self.draw()
 
@@ -327,6 +339,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
             self.i = 0
             i = self.i
             self.background4 = self.blank_background4
+            self.background3 = self.blank_background3
+
             self.background2 = self.blank_background2
             self.restore_region(self.background2)
 
@@ -363,6 +377,14 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.plot2_small.set_data(self.r[self.i - 35*step:i], self.r_i[self.i - 35*step:i])
         self.plot2_fade.set_data(self.r[:i], self.r_i[:i])
 
+
+        #======
+        # ax3's animation
+        #======
+
+        self.restore_region(self.background3)
+        self.plot3.set_data(self.ui.core.t[self.i - step:self.i], self.cossim[self.i - step:self.i])
+
         #======
         # ax4's animation
         #======
@@ -372,6 +394,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
         #self.scatter4.set_offsets(np.array([self.ui.core.t[self.i], self.plot4_data[self.i]]))
 
         self.ax4.draw_artist(self.plot4)
+        self.ax3.draw_artist(self.plot3)
+
 
         self.ax1.draw_artist(self.plot1)
         self.ax1.draw_artist(self.point1)
@@ -382,6 +406,8 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax2.draw_artist(self.plot2_fade)
 
         self.background4 = self.copy_from_bbox(self.ax4.bbox)
+        self.background3 = self.copy_from_bbox(self.ax3.bbox)
+
 
         renderer = self.get_renderer()
         self.ax1.draw(renderer)

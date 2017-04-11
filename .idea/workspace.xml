@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae5b0a9d-2c39-4b39-810e-932d7fdd4520" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test_recouvrement_corr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test3d.py" afterPath="$PROJECT_DIR$/Test3d.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_Correlation.py" afterPath="$PROJECT_DIR$/Test_Correlation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_cosine_similarity.py" afterPath="$PROJECT_DIR$/Test_cosine_similarity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_recouvrement.py" afterPath="$PROJECT_DIR$/Test_recouvrement.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/projet_UI.py" afterPath="$PROJECT_DIR$/projet_UI.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Projet_Chaos.iws" />
@@ -32,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/projet_UI.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
+              <caret line="390" column="0" selection-start-line="390" selection-start-column="0" selection-end-line="390" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -55,8 +53,8 @@
       <file leaf-file-name="Test_cosine_similarity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.59375">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.59375">
+              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -84,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test_recouvrement.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test_recouvrement.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59532374">
-              <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+            <state vertical-scroll-proportion="8.125">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
                 <element signature="e#69#87#0" expanded="true" />
               </folding>
@@ -96,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="last_cossim_cover.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="last_cossim_cover.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+            <state vertical-scroll-proportion="65.15306">
+              <caret line="2554" column="99" selection-start-line="2554" selection-start-column="99" selection-end-line="2554" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -109,7 +107,7 @@
       <file leaf-file-name="Test_Liapunov.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_Liapunov.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
               <folding>
                 <element signature="e#69#87#0" expanded="true" />
@@ -163,7 +161,6 @@
         <option value="$PROJECT_DIR$/Manual_3d.py" />
         <option value="$PROJECT_DIR$/../../Lib/site-packages/matplotlib/backends/qt_compat.py" />
         <option value="$PROJECT_DIR$/testanim.py" />
-        <option value="$PROJECT_DIR$/projet_UI.py" />
         <option value="$PROJECT_DIR$/projet_core.py" />
         <option value="$PROJECT_DIR$/Test_scrollgraph.py" />
         <option value="$PROJECT_DIR$/Test.py" />
@@ -173,8 +170,9 @@
         <option value="$PROJECT_DIR$/Test_Correlation.py" />
         <option value="$PROJECT_DIR$/Test_recouvrement_corr.py" />
         <option value="$PROJECT_DIR$/Test3d.py" />
-        <option value="$PROJECT_DIR$/Test_cosine_similarity.py" />
         <option value="$PROJECT_DIR$/Test_recouvrement.py" />
+        <option value="$PROJECT_DIR$/Test_cosine_similarity.py" />
+        <option value="$PROJECT_DIR$/projet_UI.py" />
       </list>
     </option>
   </component>
@@ -240,7 +238,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
   </component>
-  <component name="RunManager" selected="Python.Test_cosine_similarity">
+  <component name="RunManager" selected="Python.projet_UI">
     <configuration default="false" name="Test_Correlation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -254,40 +252,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Projet_Chaos" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_Correlation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="projet_UI" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Projet_Chaos" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/projet_UI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Test_recouvrement" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Projet_Chaos" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_recouvrement.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -322,6 +286,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Projet_Chaos" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_cosine_similarity.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test_recouvrement" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Charles\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Projet_Chaos" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_recouvrement.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="projet_UI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Charles\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Projet_Chaos" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/projet_UI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -504,18 +502,18 @@
       <item index="1" class="java.lang.String" itemvalue="Python.Test_liapunov_2d" />
       <item index="2" class="java.lang.String" itemvalue="Python.TESTESTESTES" />
       <item index="3" class="java.lang.String" itemvalue="Python.Test_Correlation" />
-      <item index="4" class="java.lang.String" itemvalue="Python.projet_UI" />
-      <item index="5" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
-      <item index="6" class="java.lang.String" itemvalue="Python.Test3d" />
-      <item index="7" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Test3d" />
+      <item index="5" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+      <item index="6" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
+      <item index="7" class="java.lang.String" itemvalue="Python.projet_UI" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Test3d" />
+        <item index="0" class="java.lang.String" itemvalue="Python.projet_UI" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
         <item index="2" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Test_Correlation" />
-        <item index="4" class="java.lang.String" itemvalue="Python.projet_UI" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Test3d" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Test_Correlation" />
       </list>
     </recent_temporary>
   </component>
@@ -638,7 +636,13 @@
       <option name="project" value="LOCAL" />
       <updated>1491852973583</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Je m'étais planté dans la similarité cosinus la ça a pas mal plus de sens. Test3d fait pu d'animations je m'en suis servi pour générer des graphiques.">
+      <created>1491866896690</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1491866896691</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -647,17 +651,17 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18944591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39666668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -710,7 +714,8 @@
     <MESSAGE value="Petite optimisation le UI devrait s'initialiser 4x plus vite" />
     <MESSAGE value="j'ai essayé dequoi avec le temps de prédictibilité en fonction de la position initiale" />
     <MESSAGE value="j'ai implémenté la méthode avec les matrices de lambda pour qu'on puisse comparer avec la méthode &quot;bruteforce&quot; plus tard" />
-    <option name="LAST_COMMIT_MESSAGE" value="j'ai implémenté la méthode avec les matrices de lambda pour qu'on puisse comparer avec la méthode &quot;bruteforce&quot; plus tard" />
+    <MESSAGE value="Je m'étais planté dans la similarité cosinus la ça a pas mal plus de sens. Test3d fait pu d'animations je m'en suis servi pour générer des graphiques." />
+    <option name="LAST_COMMIT_MESSAGE" value="Je m'étais planté dans la similarité cosinus la ça a pas mal plus de sens. Test3d fait pu d'animations je m'en suis servi pour générer des graphiques." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -980,24 +985,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projet_UI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test_liapunov_2d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1013,16 +1000,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_Liapunov.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
-          <folding>
-            <element signature="e#69#87#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1054,21 +1031,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.125">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding>
+            <element signature="e#69#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.59375">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.59375">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
+    <entry file="file://$PROJECT_DIR$/projet_UI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59532374">
-          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="390" column="0" selection-start-line="390" selection-start-column="0" selection-end-line="390" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_Liapunov.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
           <folding>
             <element signature="e#69#87#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="65.15306">
+          <caret line="2554" column="99" selection-start-line="2554" selection-start-column="99" selection-end-line="2554" selection-end-column="99" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -42,7 +42,6 @@ def generate_data(y0, t):
 
 def cosine_similarity(mat1, mat2):
     cssim = []
-    print(mat1.size)
     for i in range(0,mat1.size//3 -1):
         x1 = mat1[i,0]
         y1 = mat1[i,1]
@@ -106,7 +105,7 @@ if __name__ == "__main__":
 
     resolution = 5000
 
-    for i in range(0,resolution,5):
+    for i in range(0,resolution,1):
         mat1 = initial_values[i:]
 
         y = [initial_values[i,0] +1e-5, initial_values[i,1], initial_values[i,2]]
