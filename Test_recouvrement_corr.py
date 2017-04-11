@@ -93,7 +93,7 @@ def fit(mat,length):
 
     from scipy.optimize import curve_fit
     corr = autocorr(mat,10,length)
-    y = np.linspace(10,length,length-10)
+    y = np.linspace(10,length/100,length-10)
     popt, pcov = curve_fit(func, y, corr)
     return y, corr, popt, pcov
 
@@ -109,9 +109,9 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    resolution = 1000
+    resolution = 5000
 
-    for i in range(0,resolution,1):
+    for i in range(0,resolution,5):
         mat1 = initial_values[i:]
         y = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
 
@@ -129,9 +129,7 @@ if __name__ == "__main__":
     zs = thresh_matrix[1:,2]
     c = thresh_matrix[1:,3]
     count = 0
-    #for i in c:
-    #    c[count] = np.exp(-i)
-    #    count += 1
+
     print(c)
 
     np.savetxt("last_cossim_cover.txt", thresh_matrix)

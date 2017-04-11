@@ -20,8 +20,11 @@ def autocorr( mat, min_step, max_step):
     count = 0
     for step in range(min_step,max_step):
         somme = 0
-        for i in range(0,mat.size - step):
-                somme += mat[i]*mat[i+step]
+        for i in range(0,mat.size//3 - step):
+                r_1 = np.sqrt(mat[i,0]**2 + mat[i,1]**2 + mat[i,2]**2)
+                r_2 = np.sqrt(mat[i+step,0]**2 + mat[i+step,1]**2 + mat[i+step,2]**2)
+
+                somme +=mat[i,0]*mat[i+step,0]
         corr.append(somme/(100))
         count += 1
     return corr
@@ -43,11 +46,17 @@ def func(x,a,b,c):
 if __name__ == "__main__":
     sigma, rho, beta = 10, 28, 8/3
     t = np.linspace(1, 100, 10001)
-    y0 = [5, 5, 10]
-
+    y0 = [1, 1, 1]
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
+    #plt.plot(autocorr(sol,10,8000))
+    mat = sol
+    r_1 = np.sqrt(mat[:,0]**2 + mat[:,1]**2 + mat[:,2]**2)
+    print(np.mean(r_1))
+    plt.plot(r_1)
+    plt.show()
 
-    y, corr, popt, pcov = fit(sol[:,1],50)
+
+    y, corr, popt, pcov = fit(sol,50)
     plt.plot(y,corr)
     plt.plot(y, func(y, *popt))
     print(popt[0],' * ',"e^(-",popt[1],") + ", popt[2])

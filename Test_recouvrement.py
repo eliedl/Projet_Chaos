@@ -104,36 +104,36 @@ if __name__ == "__main__":
     ax = fig.add_subplot(111, projection='3d')
 
     resolution = 5000
-
-    for i in range(0,resolution,1):
+    espacement = 1
+    for i in range(0,resolution,10):
         mat1 = initial_values[i:]
 
-        y = [initial_values[i,0] +1e-5, initial_values[i,1], initial_values[i,2]]
+        y = [initial_values[i,0] +espacement, initial_values[i,1], initial_values[i,2]]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold1 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+1e-5]
+        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+espacement]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold2 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] , initial_values[i,1]+1e-5, initial_values[i,2]]
+        y = [initial_values[i,0] , initial_values[i,1]+espacement, initial_values[i,2]]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold3 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] -1e-5, initial_values[i,1], initial_values[i,2]]
+        y = [initial_values[i,0] -espacement, initial_values[i,1], initial_values[i,2]]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold4 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-1e-5]
+        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-espacement]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold5 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] , initial_values[i,1]-1e-5, initial_values[i,2]]
+        y = [initial_values[i,0] , initial_values[i,1]-espacement, initial_values[i,2]]
         mat2 = generate_data(y,t[i:])
         coeff = cosine_similarity(mat1,mat2)
         threshhold6 = calculate_threshhold(coeff,t)
