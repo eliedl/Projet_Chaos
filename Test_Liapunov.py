@@ -84,8 +84,6 @@ if __name__ == "__main__":
         lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(Y,Z)))
         liapunov = max([lam1, lam2, lam3])
         threshhold = liapunov
-        if liapunov < 0.2:
-            threshhold = 0
 
         local = np.array([pos[0], pos[1], pos[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
