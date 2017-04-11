@@ -97,7 +97,7 @@ def run_one():
 if __name__ == "__main__":
 
     t = np.linspace(1, 100, 10001)
-    y0 = [1,1,1]
+    y0 = [1.547679936204874984e+00, 2.123422213176072049e+00, 2.018664314318483122e+01]
     initial_values = generate_data(y0,t)
     thresh_matrix = np.zeros((1, 4))
     fig = plt.figure()
