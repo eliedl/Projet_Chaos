@@ -106,6 +106,7 @@ class Projet_UI(QtWidgets.QWidget):
             self.rho_edit.setText('28')
             self.beta_edit.setText('2.67')
         #wfnwj dvow dv
+        
         if self.model_combo.currentText() == 'Rössler':
             self.sigma_edit.setText('0.2')
             self.rho_edit.setText('0.2')

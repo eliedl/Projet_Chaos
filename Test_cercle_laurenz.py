@@ -112,10 +112,10 @@ def animate(i):
     # we'll step two time-steps per frame.  This leads to nice results.
     count = 0
     for pt in pts:
-        values = liste_sols[count]
-        x = values[i,0]
-        y = values[i,1]
-        z = values[i,2]
+        ind = liste_ind[count]
+        x = sol[i+ind,0]
+        y = sol[i+ind,1]
+        z = sol[i+ind,2]
         pt.set_data(x, y)
         pt.set_3d_properties(z)
         count += 1
@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
     sigma, rho, beta = 10, 28, 8/3
 
-    t = np.linspace(1, 100, 10001)
+    t = np.linspace(1, 1000, 100001)
     y0 = [1,1,1]
 
     sol = generate_data(y0, t)
@@ -136,16 +136,18 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    centre = [-4.108202576766243119e+00, -7.212142429485874473e+00, 2.024074651651810086e+01]
-    arrete = 8
-    epaisseur = 1.5
+    centre = [-17, -10, 42]
+    arrete = 12
+    epaisseur = 5
     valid_matrix = points_in_circle(sol, centre, arrete, epaisseur)
     liste_sols = []
+    liste_ind = []
 
     for i in range(0, valid_matrix.shape[0]):
         point = [valid_matrix[i,0],valid_matrix[i,1],valid_matrix[i,2]]
-        lasol = generate_data(point,t)
-        liste_sols.append(lasol)
+        liste_ind.append(np.where(sol == point)[0])
+        #lasol = generate_data(point,t)
+        #liste_sols.append(lasol)
         print(100*i//valid_matrix.shape[0])
 
     pts = sum([ax.plot([], [], [], 'ro', markersize = 1)for i in range(0,valid_matrix.shape[0])], [])
@@ -157,7 +159,7 @@ if __name__ == "__main__":
     ax.plot(sol[:,0] , sol[:,1], sol[:,2], lw = 0.1)
     #ax.scatter(cube_corners(centre,arrete))
     anim = animation.FuncAnimation(fig, animate, init_func=init,
-                               frames=500, interval=30, blit=False)
+                               frames=500, interval=30, blit=True)
     fig.canvas.draw()
 
     plt.show()
