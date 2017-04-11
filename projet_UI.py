@@ -106,7 +106,7 @@ class Projet_UI(QtWidgets.QWidget):
             self.rho_edit.setText('28')
             self.beta_edit.setText('2.67')
 
-        if self.model_combo.currentText() == 'Roessler':
+        if self.model_combo.currentText() == 'Rössler':
             self.sigma_edit.setText('0.2')
             self.rho_edit.setText('0.2')
             self.beta_edit.setText('14')
@@ -382,10 +382,10 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax2.set_xlim([0, max(self.r)])
 
         self.ax3.set_ylim([-5, max(self.cossim)])
-        self.ax3.set_xlim([0, 101])
+        self.ax3.set_xlim([0, max(self.ui.core.t)])
 
         self.ax4.set_ylim([-1, max(self.plot4_data)])
-        self.ax4.set_xlim([0, 101])
+        self.ax4.set_xlim([0, max(self.ui.core.t)])
 
         self.draw()
 

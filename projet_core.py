@@ -39,7 +39,7 @@ class Core:
     def solve_edo(self):
         if self.attractor == 'Lorenz':
             func = self.lorentz
-        elif self.attractor == 'Roessler':
+        elif self.attractor == 'Rössler':
             func = self.roessler
         elif self.attractor == 'Unknown':
             func = self.unknown
@@ -58,28 +58,44 @@ class Core:
 
 if __name__ == '__main__':
     core_1 = Core()
-    core_1.coordinates = np.array([[20, 1, 1], [1+1e-5, 1+1e-5, 1+1e-5]])
-    core_1.attractor = 'Unknown'
-    core_1.params = np.array([[100, 30, 00]])
+    core_1.coordinates = np.array([[1, 1, 1], [1.05, 1+1e-1, 1+1e-1]])
+    core_1.attractor = 'Lorenz'
+    core_1.params = np.array([[10, 28, 8/3]])
     core_1.t = np.linspace(1, 100, 10001)
     core_1.solve_edo()
 
     print(np.shape(core_1.t))
     print(np.shape(core_1.time_series))
-    mpl.rcParams['legend.fontsize'] = 10
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
+    #mpl.rcParams['legend.fontsize'] = 10
+    #fig = plt.figure()
+    #ax = fig.gca(projection='3d')
     #x = core_1.time_series[:, 0]
     #y = core_1.time_series[:, 1]
     #z = core_1.time_series[:, 2]
 
-    x = core_1.time_series[:, 0]
+    x = core_1.time_series[65:, 0]
+    x_i = core_1.time_series[65:, 3]
     y = core_1.time_series[:, 1]
     z = core_1.time_series[:, 2]
 
-    r = np.sqrt(x**2 + y**2 + z**2)
-    ax.plot(x, y, z, label='Lorentz attractor', marker = '.', markersize = 2, ls='none')
-    ax.legend()
+
+
+    plt.subplot(211)
+    plt.plot(core_1.t[65:], x, lw = 0.3)
+    plt.axvline(15.15, color='r', lw= 0.3)
+    plt.text(5, 10, 'Changement de feuillet', fontsize= 8)
+    plt.xlim([0, 40])
+    plt.ylabel('$x(t)$')
+    plt.xlabel('Temps')
+    plt.subplot(212)
+    plt.plot(core_1.t[65:], x_i, lw = 0.3)
+    plt.axvline(15, color='r', lw= 0.3)
+    plt.xlim([0, 40])
+    plt.ylabel('$x(t)$')
+    plt.xlabel('Temps')
+    plt.tight_layout()
+    #ax.plot(x, y, z, label='Lorentz attractor', marker = '.', markersize = 2, ls='none')
+    #ax.legend()
     plt.show()
 
     #plt.plot(core_1.t, r)
