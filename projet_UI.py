@@ -51,12 +51,23 @@ class Projet_UI(QtWidgets.QWidget):
         self.core.solve_edo()
         self.simulationsFig.i = self.i
         self.simulationsFig.update_figure_data()
+        self.simulationsFig.initialize()
         self.simulationsFig.timer.start(30)
 
     def pause(self):
         self.simulationsFig.timer.stop()
-        self.simulationsFig.plot2.remove()
-        self.simulationsFig.plot2_small.remove()
+
+        self.simulationsFig.ax2.cla()
+        self.simulationsFig.ax4.cla()
+        self.simulationsFig.ax2.set_xlabel('$r$')
+        self.simulationsFig.ax2.set_ylabel("$r\ '$")
+
+        self.simulationsFig.ax3.set_xlabel('Temps')
+        self.simulationsFig.ax3.set_ylabel('Correlation')
+
+        self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
+        self.simulationsFig.ax4.set_xlabel('Temps')
+
         renderer = self.simulationsFig.get_renderer()
         self.simulationsFig.ax2.draw(renderer)
         self.i = self.simulationsFig.i
@@ -66,9 +77,22 @@ class Projet_UI(QtWidgets.QWidget):
         self.update_core()
         self.core.solve_edo()
         self.simulationsFig.update_figure_data()
-        self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
-        self.simulationsFig.restore_region(self.simulationsFig.blank_background2)
-        self.simulationsFig.background4 = self.simulationsFig.blank_background4
+        self.simulationsFig.ax2.cla()
+        self.simulationsFig.ax4.cla()
+
+        self.simulationsFig.ax2.set_xlabel('$r$')
+        self.simulationsFig.ax2.set_ylabel("$r\ '$")
+
+        self.simulationsFig.ax3.set_xlabel('Temps')
+        self.simulationsFig.ax3.set_ylabel('Correlation')
+
+        self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
+        self.simulationsFig.ax4.set_xlabel('Temps')
+
+        self.simulationsFig.background4 = self.simulationsFig.blank_background2
+
+        self.simulationsFig.draw()
+
 
     def change_attractor(self):
         self.simulationsFig.timer.stop()
@@ -239,7 +263,7 @@ class MyMplCanvas(FigureCanvas):
         self.initFig()
 
     def initFig(self):
-        self.ax1 = self.figure.add_axes([0, 0.38, 0.5, 0.65], projection='3d')
+        self.ax1 = self.figure.add_axes([0, 0.4, 0.5, 0.65], projection='3d')
         self.ax2 = self.figure.add_axes([0.58, 0.48, 0.4, 0.45])
         self.ax3 = self.figure.add_axes([0.08, 0.08, 0.4, 0.3])
         self.ax4 = self.figure.add_axes([0.58, 0.08, 0.4, 0.3])
@@ -276,7 +300,6 @@ class MyMplCanvas(FigureCanvas):
         self.scatter3 = self.ax3.scatter([], [])
         self.scatter4 = self.ax4.scatter([], [])
 
-
 class MyDynamicMplCanvas(MyMplCanvas):
 
     def __init__(self, ui, *args, **kwargs):
@@ -286,22 +309,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.timer.timeout.connect(self.update_figure)
         self.i = 0
 
-    def update_figure_data(self):
-
-        self.data = self.ui.core.time_series
-        self.r = np.sqrt(self.ui.core.time_series[:, 0]**2
-                                + self.ui.core.time_series[:, 1]**2
-                                + self.ui.core.time_series[:, 2]**2)
-
-        self.r_i = np.sqrt(self.ui.core.time_series[:, 3]**2
-                                + self.ui.core.time_series[:, 4]**2
-                                + self.ui.core.time_series[:, 5]**2)
-
-        self.cossim = np.degrees(np.arccos(cosine_similarity(self.data[:,:3],self.data[:,3:])))
-
-
-        self.plot4_data = np.abs(self.r - self.r_i)
-
+    def initialize(self):
         Acc_11 = self.data[:, 0]
         Acc_12 = self.data[:, 1]
         Acc_13 = self.data[:, 2]
@@ -329,6 +337,23 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
         self.blank_background2 = self.copy_from_bbox(self.ax2.bbox)
         self.draw()
+
+    def update_figure_data(self):
+
+        self.data = self.ui.core.time_series
+        self.r = np.sqrt(self.ui.core.time_series[:, 0]**2
+                                + self.ui.core.time_series[:, 1]**2
+                                + self.ui.core.time_series[:, 2]**2)
+
+        self.r_i = np.sqrt(self.ui.core.time_series[:, 3]**2
+                                + self.ui.core.time_series[:, 4]**2
+                                + self.ui.core.time_series[:, 5]**2)
+        
+        self.cossim = np.degrees(np.arccos(cosine_similarity(self.data[:,:3],self.data[:,3:])))
+
+
+
+        self.plot4_data = np.abs(self.r - self.r_i)
 
     def update_figure(self):
 
@@ -395,7 +420,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
 
         self.ax4.draw_artist(self.plot4)
         self.ax3.draw_artist(self.plot3)
-
 
         self.ax1.draw_artist(self.plot1)
         self.ax1.draw_artist(self.point1)
