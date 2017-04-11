@@ -21,6 +21,8 @@ class Projet_UI(QtWidgets.QWidget):
         self.setWindowTitle("Dynamica 2017")
         self.core = Core()
         self.init_UI()
+        self.simulationsFig.initialize()
+        self.funcFig.update_func()
         self.i = 0
 
     def update_core(self):
@@ -51,6 +53,7 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.i = self.i
         self.simulationsFig.update_figure_data()
         self.simulationsFig.initialize()
+        self.simulationsFig.set_lims()
         self.simulationsFig.timer.start(30)
 
     def pause(self):
@@ -60,10 +63,8 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.ax4.cla()
         self.simulationsFig.ax2.set_xlabel('$r$')
         self.simulationsFig.ax2.set_ylabel("$r\ '$")
-
         self.simulationsFig.ax3.set_xlabel('Temps')
         self.simulationsFig.ax3.set_ylabel('Correlation')
-
         self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
         self.simulationsFig.ax4.set_xlabel('Temps')
 
@@ -76,22 +77,13 @@ class Projet_UI(QtWidgets.QWidget):
         self.update_core()
         self.core.solve_edo()
         self.simulationsFig.update_figure_data()
-        self.simulationsFig.ax2.cla()
-        self.simulationsFig.ax4.cla()
 
-        self.simulationsFig.ax2.set_xlabel('$r$')
-        self.simulationsFig.ax2.set_ylabel("$r\ '$")
-
-        self.simulationsFig.ax3.set_xlabel('Temps')
-        self.simulationsFig.ax3.set_ylabel('Correlation')
-
-        self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
-        self.simulationsFig.ax4.set_xlabel('Temps')
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background2)
+        self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
 
         self.simulationsFig.background4 = self.simulationsFig.blank_background2
 
         self.simulationsFig.draw()
-
 
     def change_attractor(self):
         self.simulationsFig.timer.stop()
@@ -99,6 +91,7 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.restore_region(self.simulationsFig.blank_background2)
         self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
         self.simulationsFig.i = 0
+        self.funcFig.update_func()
 
     def update_edits(self):
 
@@ -186,13 +179,20 @@ class Projet_UI(QtWidgets.QWidget):
         #--- ComboBox ---#
         self.model_combo = QtWidgets.QComboBox()
 
-        models = ['Lorenz', 'Roessler' ,'-']
+        models = ['Lorenz', 'Rössler' ,'-']
 
         self.model_combo.addItems(models)
 
         self.model_combo.currentIndexChanged.connect(self.change_attractor)
 
-        # ------ Creation of the Manager for the Spectra figure -------#
+        # ------ Creation of the Manager for the function figure -------#
+        self.funcFig = FuncCanvas(self)
+        self.funcmanager = QtWidgets.QWidget()
+        funcmanagergrid = QtWidgets.QGridLayout()
+        funcmanagergrid.addWidget(self.funcFig, 0, 0)
+        self.funcmanager.setLayout(funcmanagergrid)
+
+        # ------ Creation of the Manager for the simulation figure -------#
         self.simulationsFig = MyDynamicMplCanvas(self)
         self.simulationstool = NavigationToolbar2QT(self.simulationsFig, self)
         self.simulationsmanager = QtWidgets.QWidget()
@@ -239,10 +239,54 @@ class Projet_UI(QtWidgets.QWidget):
 
         master_grid = QtWidgets.QGridLayout()
         master_grid.addWidget(setup_groupbox, 0, 0)
-        master_grid.addWidget(self.simulationsmanager, 0, 1, 2, 1)
+        master_grid.addWidget(self.simulationsmanager, 0, 1, 3, 1)
+        master_grid.addWidget(self.funcFig, 1, 0)
         master_grid.setColumnStretch(1, 100)
-        master_grid.setRowStretch(1, 100)
+        master_grid.setRowStretch(2, 100)
         self.setLayout(master_grid)
+
+class FuncCanvas(FigureCanvas):
+    def __init__(self, ui, parent=None, width=2, height=1, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        super(FuncCanvas, self).__init__(fig)
+        self.ui = ui
+
+        FigureCanvas.__init__(self, fig)
+        self.setParent(parent)
+
+        FigureCanvas.setSizePolicy(self,
+                                   QtWidgets.QSizePolicy.Expanding,
+                                   QtWidgets.QSizePolicy.Expanding)
+        FigureCanvas.updateGeometry(self)
+
+        self.initFig()
+
+    def initFig(self):
+        self.ax1 = self.figure.add_axes([0, 0, 0.9, 0.9])
+
+        self.ax1.set_frame_on(False)
+
+    def update_func(self):
+        self.ax1.cla()
+        if self.ui.model_combo.currentText() == 'Lorenz':
+            dot_x = r'$\dot{x} = \sigma (y - x)$'
+            dot_y = r'$\dot{y} = \rho x - y - xz$'
+            dot_z = r'$\dot{z} = xy - \beta z$'
+
+            self.ax1.text(0.3, 0.9, 'Modèle de Lorenz')
+
+        if self.ui.model_combo.currentText() == 'Rössler':
+            dot_x = r'$\dot{x} = - y - z$'
+            dot_y = r'$\dot{y} = x + \sigma z$'
+            dot_z = r'$\dot{z} = \rho + z(x - \beta)$'
+
+            self.ax1.text(0.3, 0.9, 'Modèle de Rössler')
+
+        self.ax1.text(0.3, 0.6, dot_x)
+        self.ax1.text(0.3, 0.4, dot_y)
+        self.ax1.text(0.3, 0.2, dot_z)
+
+        self.draw()
 
 
 class MyMplCanvas(FigureCanvas):
@@ -305,6 +349,16 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.i = 0
 
     def initialize(self):
+
+        self.background1 = self.copy_from_bbox(self.ax1.bbox)
+        self.background2 = self.copy_from_bbox(self.ax2.bbox)
+        self.background3 = self.copy_from_bbox(self.ax3.bbox)
+        self.background4 = self.copy_from_bbox(self.ax4.bbox)
+
+        self.blank_background4 = self.copy_from_bbox(self.ax4.bbox)
+        self.blank_background2 = self.copy_from_bbox(self.ax2.bbox)
+
+    def set_lims(self):
         Acc_11 = self.data[:, 0]
         Acc_12 = self.data[:, 1]
         Acc_13 = self.data[:, 2]
@@ -319,13 +373,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.ax4.set_ylim([-1, max(self.plot4_data)])
         self.ax4.set_xlim([0, 101])
 
-        self.background1 = self.copy_from_bbox(self.ax1.bbox)
-        self.background2 = self.copy_from_bbox(self.ax2.bbox)
-        self.background3 = self.copy_from_bbox(self.ax3.bbox)
-        self.background4 = self.copy_from_bbox(self.ax4.bbox)
-
-        self.blank_background4 = self.copy_from_bbox(self.ax4.bbox)
-        self.blank_background2 = self.copy_from_bbox(self.ax2.bbox)
         self.draw()
 
     def update_figure_data(self):
