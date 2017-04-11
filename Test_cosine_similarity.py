@@ -52,15 +52,15 @@ def cosine_similarity(mat1, mat2):
 if __name__ == "__main__":
     sigma, rho, beta = 10, 28, 8/3
     t = np.linspace(1, 100, 10001)
-
-    y0 = [5+ 1e-9, 5+ 1e-9, 5+ 1e-9]
-    y1 = [5,5,5]
+    espacement = 1e-9
+    y0 = [x+ espacement, y+ espacement, z+ espacement]
+    y1 = [3,8,4]
 
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
     sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))
     sim =np.degrees(np.arccos(cosine_similarity(sol,sol_1)))
     plt.plot(t[:-1], sim)
-    #plt.title(y1)
+    plt.title("conditions initiales: {} espacement: {}".format(y1, espacement))
     count = 0
     threshhold = 0
     for i in sim:

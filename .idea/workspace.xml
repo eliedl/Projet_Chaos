@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae5b0a9d-2c39-4b39-810e-932d7fdd4520" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Projet_Chaos.iml" afterPath="$PROJECT_DIR$/.idea/Projet_Chaos.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test3d.py" afterPath="$PROJECT_DIR$/Test3d.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_Correlation.py" afterPath="$PROJECT_DIR$/Test_Correlation.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test_cercle_laurenz.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_cosine_similarity.py" afterPath="$PROJECT_DIR$/Test_cosine_similarity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_recouvrement.py" afterPath="$PROJECT_DIR$/Test_recouvrement.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test_recouvrement_corr.py" afterPath="$PROJECT_DIR$/Test_recouvrement_corr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Projet_Chaos.iws" />
@@ -54,22 +51,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test_cosine_similarity.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test_cosine_similarity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3112245">
+            <state vertical-scroll-proportion="0.0">
               <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="projet_core.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projet_core.py">
+      <file leaf-file-name="Test_cercle_laurenz.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test_cercle_laurenz.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.48555955">
+              <caret line="134" column="22" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
+              <folding>
+                <element signature="e#24#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test_acc.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test_acc.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
-              <folding />
+              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+              <folding>
+                <element signature="e#23#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/Test_recouvrement_corr.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+              <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
               <folding>
                 <element signature="e#92#110#0" expanded="true" />
               </folding>
@@ -90,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="115" column="87" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
+              <caret line="110" column="86" selection-start-line="110" selection-start-column="86" selection-end-line="110" selection-end-column="86" />
               <folding>
                 <element signature="e#69#87#0" expanded="true" />
               </folding>
@@ -102,32 +113,18 @@
         <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="500" column="99" selection-start-line="500" selection-start-column="99" selection-end-line="500" selection-end-column="99" />
+              <caret line="251" column="23" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test_Liapunov.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test_Liapunov.py">
+      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
-              <folding>
-                <element signature="e#69#87#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test_liapunov_2d.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test_liapunov_2d.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
-              <folding>
-                <element signature="e#92#110#0" expanded="true" />
-              </folding>
+              <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -173,10 +170,12 @@
         <option value="$PROJECT_DIR$/Test_Liapunov.py" />
         <option value="$PROJECT_DIR$/projet_UI.py" />
         <option value="$PROJECT_DIR$/Test3d.py" />
-        <option value="$PROJECT_DIR$/Test_recouvrement_corr.py" />
         <option value="$PROJECT_DIR$/Test_Correlation.py" />
-        <option value="$PROJECT_DIR$/Test_recouvrement.py" />
         <option value="$PROJECT_DIR$/Test_cosine_similarity.py" />
+        <option value="$PROJECT_DIR$/Test_recouvrement_corr.py" />
+        <option value="$PROJECT_DIR$/Test_recouvrement.py" />
+        <option value="$PROJECT_DIR$/Test_acc.py" />
+        <option value="$PROJECT_DIR$/Test_cercle_laurenz.py" />
       </list>
     </option>
   </component>
@@ -242,7 +241,24 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
   </component>
-  <component name="RunManager" selected="Python.Test_cosine_similarity">
+  <component name="RunManager" selected="Python.Test_cercle_laurenz">
+    <configuration default="false" name="Test_Correlation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Charles\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Projet_Chaos" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_Correlation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <configuration default="false" name="Test_cosine_similarity" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -294,19 +310,19 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Test_Correlation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="Test_acc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Charles\Anaconda3\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Projet_Chaos" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_Correlation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_acc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -433,6 +449,23 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="Test_cercle_laurenz" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Projet_Chaos" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_cercle_laurenz.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <configuration default="false" name="Test_recouvrement_corr" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -501,22 +534,25 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="Python.Test_recouvrement_corr" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Test_liapunov_2d" />
-      <item index="2" class="java.lang.String" itemvalue="Python.TESTESTESTES" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Test3d" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
-      <item index="5" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
-      <item index="6" class="java.lang.String" itemvalue="Python.projet_UI" />
-      <item index="7" class="java.lang.String" itemvalue="Python.Test_Correlation" />
+    <list size="10">
+      <item index="0" class="java.lang.String" itemvalue="Python.Test_cercle_laurenz" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Test_recouvrement_corr" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Test_liapunov_2d" />
+      <item index="3" class="java.lang.String" itemvalue="Python.TESTESTESTES" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Test3d" />
+      <item index="5" class="java.lang.String" itemvalue="Python.Test_Correlation" />
+      <item index="6" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+      <item index="7" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
+      <item index="8" class="java.lang.String" itemvalue="Python.projet_UI" />
+      <item index="9" class="java.lang.String" itemvalue="Python.Test_acc" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.Test_acc" />
         <item index="1" class="java.lang.String" itemvalue="Python.Test_recouvrement" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Test_Correlation" />
-        <item index="3" class="java.lang.String" itemvalue="Python.projet_UI" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Test_cosine_similarity" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Test_Correlation" />
+        <item index="4" class="java.lang.String" itemvalue="Python.projet_UI" />
       </list>
     </recent_temporary>
   </component>
@@ -657,12 +693,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491918794639</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="J'ai ajouté le graphique du cosine similarité dans le projet UI et paufiné test_cosine_similarity">
+      <created>1491927469362</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1491927469362</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18944591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -671,7 +713,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -740,23 +782,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Test3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projet_UI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test_scrollgraph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -986,13 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/last_liapunov_2d">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1005,16 +1023,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
           <folding>
-            <element signature="e#92#110#0" expanded="true" />
+            <element signature="e#92#110#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projet_core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1023,16 +1033,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
           <folding>
-            <element signature="e#69#87#0" expanded="true" />
+            <element signature="e#69#87#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="500" column="99" selection-start-line="500" selection-start-column="99" selection-end-line="500" selection-end-column="99" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1054,6 +1056,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/projet_core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_acc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_recouvrement_corr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding>
+            <element signature="e#92#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="86" selection-start-line="110" selection-start-column="86" selection-end-line="110" selection-end-column="86" />
+          <folding>
+            <element signature="e#69#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Test_Correlation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1064,31 +1120,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test_recouvrement_corr.py">
+    <entry file="file://$PROJECT_DIR$/last_cossim_cover.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding>
-            <element signature="e#92#110#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_recouvrement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="115" column="87" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
-          <folding>
-            <element signature="e#69#87#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_cosine_similarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3112245">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <caret line="251" column="23" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_cercle_laurenz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48555955">
+          <caret line="134" column="22" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
