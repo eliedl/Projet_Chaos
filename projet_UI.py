@@ -62,10 +62,13 @@ class Projet_UI(QtWidgets.QWidget):
 
         self.simulationsFig.ax2.cla()
         self.simulationsFig.ax4.cla()
+        self.simulationsFig.ax3.cla()
         self.simulationsFig.ax2.set_xlabel('$r$')
         self.simulationsFig.ax2.set_ylabel("$r\ '$")
+
         self.simulationsFig.ax3.set_xlabel('Temps')
         self.simulationsFig.ax3.set_ylabel('Correlation')
+
         self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
         self.simulationsFig.ax4.set_xlabel('Temps')
 
@@ -83,6 +86,8 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.restore_region(self.simulationsFig.blank_background4)
 
         self.simulationsFig.background4 = self.simulationsFig.blank_background2
+        self.simulationsFig.background3 = self.simulationsFig.blank_background2
+
 
         self.simulationsFig.draw()
 
@@ -322,6 +327,7 @@ class MyMplCanvas(FigureCanvas):
         self.ax4.set_xlabel('Temps')
 
         self.ax1.view_init(elev=15)
+
 
         self.plot1, = self.ax1.plot([], [], [], 'b', lw= 0.3)
         self.plot1_i, = self.ax1.plot([], [], [], 'r', lw= 0.3)
