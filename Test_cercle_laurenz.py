@@ -136,11 +136,14 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    #centre = [-17, -10, 42]
-    centre = [-17, -10, 45]
+    #centre = [-17, -10, 42] #top
+    centre = [-17, -10, 45] #demi-cercle top
+    #centre = [-8, -8, 27] #centre
+    #centre = [-12, -9, 34] #spirale
+    #centre = [-10, -9, 30] #près du centre
 
-    arrete = 12
-    epaisseur = 5
+    arrete = 10
+    epaisseur = 3
     valid_matrix = points_in_circle(sol, centre, arrete, epaisseur)
     liste_sols = []
     liste_ind = []
@@ -161,7 +164,8 @@ if __name__ == "__main__":
     ax.plot(sol[:,0] , sol[:,1], sol[:,2], lw = 0.01)
     #ax.scatter(cube_corners(centre,arrete))
     anim = animation.FuncAnimation(fig, animate, init_func=init,
-                               frames=500, interval=30, blit=True)
+                               frames=2000, interval=30, blit=True)
+    anim.save('top_top.mp4', fps=30, writer = "ffmpeg")
     fig.canvas.draw()
 
     plt.show()

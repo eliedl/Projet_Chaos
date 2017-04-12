@@ -36,21 +36,21 @@ def fit(mat,length):
     return y, corr, popt, pcov
 
 def func(x,a,b,c):
-        return a*np.exp(-b*x)
+        return a*np.exp(-b*x) + c
 
 
 if __name__ == "__main__":
     sigma, rho, beta = 10, 28, 8/3
     t = np.linspace(1, 100, 10001)
-    y0 = [1, 1, 1]
+    y0 = [0.1, 0.1, 0.1]
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
     mat = sol
 
-    y1, corr1, popt1, pcov1 = fit(sol[:,0],50)
-    y2, corr2, popt2, pcov2 = fit(sol[:,1],50)
-    y3, corr3, popt3, pcov3 = fit(sol[:,2],50)
+    y1, corr1, popt1, pcov1 = fit(sol[:,0],70)
+    y2, corr2, popt2, pcov2 = fit(sol[:,1],70)
+    y3, corr3, popt3, pcov3 = fit(sol[:,2],70)
 
-    plt.plot(corr3)
+    plt.plot(corr1)
 
     print(popt1[0],' * ',"e^(-",popt1[1],") + ", popt1[2], " avec ",1/popt1[1])
     print(popt2[0],' * ',"e^(-",popt2[1],") + ", popt2[2], " avec ",1/popt2[1])
@@ -59,5 +59,8 @@ if __name__ == "__main__":
     coeff = (1/popt1[1] + 1/popt2[1] + 1/popt3[1])/3
 
     print("Le coeff est alors: ",coeff)
+    plt.show()
+    plt.plot(corr1, t[:60])
+    plt.plot(func(t,popt1[0], popt1[1], popt1[2]))
     plt.show()
     print("done")

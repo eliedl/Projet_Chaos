@@ -52,9 +52,10 @@ def cosine_similarity(mat1, mat2):
 if __name__ == "__main__":
     sigma, rho, beta = 10, 28, 8/3
     t = np.linspace(1, 100, 10001)
-    espacement = 1e-9
-    y0 = [x+ espacement, y+ espacement, z+ espacement]
-    y1 = [3,8,4]
+    espacement = 1e-1
+    x=1
+    y0 = [1+ espacement, 1+ espacement, 1+ espacement]
+    y1 = [1,1,1]
 
     sol = odeint(pend, y0, t, args=(sigma, rho, beta))
     sol_1 = odeint(pend, y1, t, args=(sigma, rho, beta))

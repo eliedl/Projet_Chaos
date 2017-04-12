@@ -104,7 +104,7 @@ if __name__ == "__main__":
     ax = fig.add_subplot(111, projection='3d')
 
     resolution = 5000
-    espacement = 1
+    espacement = 1e-5
     for i in range(0,resolution,1):
         mat1 = initial_values[i:]
 
