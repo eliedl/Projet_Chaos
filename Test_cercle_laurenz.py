@@ -111,15 +111,27 @@ def init():
 def animate(i):
     # we'll step two time-steps per frame.  This leads to nice results.
     count = 0
+    wait_time = 50
+    if i <= wait_time and i > 1:
+            return pts
+    if i == 1:
+        wait_time = 0
     for pt in pts:
+
         ind = liste_ind[count]
-        x = sol[i+ind,0]
-        y = sol[i+ind,1]
-        z = sol[i+ind,2]
+        ind = ind[0]
+        if (i + ind) >= (sol.shape[0]):
+            pt.set_data(100, 100)
+            pt.set_3d_properties(100)
+            count += 1
+            continue
+        j = i - wait_time
+        x = sol[j+ind,0]
+        y = sol[j+ind,1]
+        z = sol[j+ind,2]
         pt.set_data(x, y)
         pt.set_3d_properties(z)
         count += 1
-    #truc.set_data(i/10, 0 ,0)
     fig.canvas.draw()
     return pts
 
@@ -130,17 +142,20 @@ if __name__ == "__main__":
 
     t = np.linspace(1, 1000, 100001)
     y0 = [1,1,1]
+    t2 = np.linspace(1,100,100001)
 
     sol = generate_data(y0, t)
+    sol2 = generate_data(y0, t2)
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
     #centre = [-17, -10, 42] #top
-    centre = [-17, -10, 45] #demi-cercle top
+    #centre = [-17, -10, 43] #demi-cercle top
     #centre = [-8, -8, 27] #centre
     #centre = [-12, -9, 34] #spirale
-    #centre = [-10, -9, 30] #près du centre
+    #centre = [-5, -7, 13] # en bas du centre
+    centre = [0, 0, 20] #ejection
 
     arrete = 10
     epaisseur = 3
@@ -161,11 +176,11 @@ if __name__ == "__main__":
     ax.set_xlim((-25, 25))
     ax.set_ylim((-35, 35))
     ax.set_zlim((5, 55))
-    ax.plot(sol[:,0] , sol[:,1], sol[:,2], lw = 0.01)
+    ax.plot(sol2[:,0] , sol2[:,1], sol2[:,2], lw = 0.1)
     #ax.scatter(cube_corners(centre,arrete))
     anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=2000, interval=30, blit=True)
-    anim.save('top_top.mp4', fps=30, writer = "ffmpeg")
+    anim.save('ejection.mp4', fps=30, writer = "ffmpeg")
     fig.canvas.draw()
 
     plt.show()

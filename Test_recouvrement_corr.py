@@ -115,9 +115,9 @@ if __name__ == "__main__":
         mat1 = initial_values[i:]
         y = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
 
-        garbage, corr, popt, pcov = fit(mat1[:,0],50)
+        garbage, corr, popt, pcov = fit(mat1[:,2],50)
 
-        threshhold = 1/popt[1]
+        threshhold = -1/popt[1]
         local = np.array([y[0], y[1], y[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
