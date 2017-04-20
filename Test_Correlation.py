@@ -50,7 +50,7 @@ if __name__ == "__main__":
     y2, corr2, popt2, pcov2 = fit(sol[:,1],longueur)
     y3, corr3, popt3, pcov3 = fit(sol[:,2],longueur -20)
 
-    #plt.plot(corr1)
+    plt.plot(corr2)
 
     print(popt1[0],' * ',"e^(-",popt1[1],") + ", popt1[2], " avec ",1/popt1[1])
     print(popt2[0],' * ',"e^(-",popt2[1],") + ", popt2[2], " avec ",1/popt2[1])
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     coeff = (1/popt1[1] + 1/popt2[1] + 1/popt3[1])/3
 
     print("Le coeff est alors: ",coeff)
-   # plt.show()
+    plt.show()
     plt.plot(corr1)
     plt.plot(t[10:(longueur-10)*100], func(t,popt1[0]/2, popt1[1], popt1[2])[10:(longueur-10)*100])
     plt.show()

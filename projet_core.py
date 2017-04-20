@@ -54,7 +54,6 @@ class Core:
             func = self.fabinovich_fabrikant
 
         for i in range(np.shape(self.coordinates)[0]):
-
             sol = odeint(func, self.coordinates[i, :], self.t,
                          args=(self.params[0, 0], self.params[0, 1], self.params[0, 2]))
 

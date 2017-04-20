@@ -1,11 +1,13 @@
 __author__ = 'Charles'
 __author__ = 'Charles'
 __author__ = 'Charles'
+__author__ = 'Charles'
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from matplotlib import animation
 from mpl_toolkits.mplot3d import Axes3D
+import projet_core
 
 
 def f(t, y, sigma, rho, beta):
@@ -96,50 +98,65 @@ def run_one():
 
 if __name__ == "__main__":
 
-    t = np.linspace(1, 100, 10001)
-    y0 = [1.5, 2, 2]
-    initial_values = generate_data(y0,t)
+    t = np.linspace(1, 1000, 10001)
+    espacement = 1e-2
+    x=1
+    y0 = [1+ espacement, 1+ espacement, 1+ espacement]
+    y1 = [1,1,1]
+    core_1 = projet_core.Core()
+    core_1.coordinates = np.array([y1, [1+ espacement, 1+ espacement, 1+ espacement]])
+    core_1.attractor = 'Rössler'
+    core_1.params = np.array([[0.2, 0.2, 14]])
+    core_1.t = t
+    core_1.solve_edo()
+
+    initial_values =  core_1.time_series[:,:3]
     thresh_matrix = np.zeros((1, 4))
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
 
     resolution = 5000
-    espacement = 1e-8
+    espacement = 1e-7
     for i in range(0,resolution,1):
+
+        core_1 = projet_core.Core()
+
         mat1 = initial_values[i:]
 
-        y = [initial_values[i,0] +espacement, initial_values[i,1], initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        y1 = [initial_values[i,0] +espacement, initial_values[i,1], initial_values[i,2]]
+        y2 = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+espacement]
+        y3 = [initial_values[i,0] , initial_values[i,1]+espacement, initial_values[i,2]]
+        y4 = [initial_values[i,0] -espacement, initial_values[i,1], initial_values[i,2]]
+        y5 = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-espacement]
+        y6 = [initial_values[i,0] , initial_values[i,1]-espacement, initial_values[i,2]]
+
+        core_1.coordinates = np.array([y1,y2,y3,y4,y5,y6])
+        core_1.attractor = 'Rössler'
+        core_1.params = np.array([[0.2, 0.2, 14]])
+        core_1.t = t
+        core_1.solve_edo()
+
+        ymat1 = core_1.time_series[:,:3]
+        ymat2 = core_1.time_series[:,3:6]
+        ymat3 = core_1.time_series[:,6:9]
+        ymat4 = core_1.time_series[:,9:12]
+        ymat5 = core_1.time_series[:,12:15]
+        ymat6 = core_1.time_series[:,15:18]
+
+        coeff = cosine_similarity(mat1,ymat1)
         threshhold1 = calculate_threshhold(coeff,t)
 
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]+espacement]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        coeff = cosine_similarity(mat1,ymat2)
         threshhold2 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1]+espacement, initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        coeff = cosine_similarity(mat1,ymat3)
         threshhold3 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] -espacement, initial_values[i,1], initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        coeff = cosine_similarity(mat1,ymat4)
         threshhold4 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1], initial_values[i,2]-espacement]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        coeff = cosine_similarity(mat1,ymat5)
         threshhold5 = calculate_threshhold(coeff,t)
-
-        y = [initial_values[i,0] , initial_values[i,1]-espacement, initial_values[i,2]]
-        mat2 = generate_data(y,t[i:])
-        coeff = cosine_similarity(mat1,mat2)
+        coeff = cosine_similarity(mat1,ymat6)
         threshhold6 = calculate_threshhold(coeff,t)
 
         threshhold = (threshhold1+threshhold2+threshhold3+threshhold4+threshhold5+threshhold6)/6
-        local = np.array([y[0], y[1], y[2], threshhold])
+        local = np.array([y1[0], y1[1], y1[2], threshhold])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
 
@@ -151,8 +168,10 @@ if __name__ == "__main__":
     count = 0
 
     #print(c)
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
 
-    np.savetxt("-8_cossim_cover.txt", thresh_matrix)
+    np.savetxt("-7_cossim_cover.txt", thresh_matrix)
 
     p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
     fig.colorbar(p)

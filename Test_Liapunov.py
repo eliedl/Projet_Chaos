@@ -68,24 +68,27 @@ if __name__ == "__main__":
     lam_mat =lambda Y,Z:([[- sigma, (rho + sigma -Z)/2, Y/2]
                         , [(rho + sigma -Z)/2, -1, 0]
                         ,[ Y/2, 0, -beta]])
-    t = np.linspace(1, 100, 100001)
+    lam_mat =lambda Y,Z:([[- sigma, (rho + sigma -Z)/2, 0]
+                        , [(rho + sigma -Z)/2, -1, 0]
+                        ,[ 0, 0, -beta]])
+    t = np.linspace(1, 1000, 100001)
     y0 = [1.547679936204874984e+00, 2.123422213176072049e+00, 2.018664314318483122e+01]
     initial_values = generate_data(y0,t)
     thresh_matrix = np.zeros((1, 4))
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    resolution = 100000
+    resolution = 10000
 
     for i in range(0,resolution,1):
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
-        Y = pos[1]
+        Y = 0
         Z = pos[2]
-        lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(Y,Z)))
-        liapunov = max([lam1, lam2, lam3])
-        threshhold = liapunov
-
-        local = np.array([pos[0], pos[1], pos[2], threshhold])
+        w = np.linalg.eigvalsh(np.array(lam_mat(Y,Z)))
+        liapunov = max(w)
+        lam3 = (-(sigma+1) + np.sqrt((rho + sigma - Z)**2 + (sigma+1)**2))/2
+        liapunov = lam3
+        local = np.array([pos[0], pos[1], pos[2], liapunov])
         thresh_matrix = np.vstack((thresh_matrix, local))
         print((i * 100)//resolution)
 
@@ -95,11 +98,14 @@ if __name__ == "__main__":
     zs = thresh_matrix[1:,2]
     c = thresh_matrix[1:,3]
 
+
     print(c)
 
     np.savetxt("last_liapunov", thresh_matrix)
 
     p =ax.scatter(xs, ys, zs, c=c, cmap='plasma', marker = 'o')
-    fig.colorbar(p)
+    h = fig.colorbar(p)
+    h.set_label(r'$\lambda_3(z)$')
+    fig.canvas.draw()
     plt.show()
 
