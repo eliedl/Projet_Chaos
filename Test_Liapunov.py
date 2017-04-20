@@ -1,6 +1,4 @@
-__author__ = 'Charles'
-__author__ = 'Charles'
-__author__ = 'Charles'
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -54,7 +52,6 @@ def run_one():
     sol, sol_1 = generate_data(y0,t)
     sim = np.degrees(np.arccos(cosine_similarity(sol,sol_1)))
     plt.plot(t, sim)
-    #plt.title(y1)
 
     print("Temps de corrélation : ", calculate_threshhold(sim,t)," s")
     plt.show()

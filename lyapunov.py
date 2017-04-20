@@ -37,16 +37,3 @@ if __name__ == '__main__':
 
     L_exp = calculate_liapunov(r, 0.00001)
     np.savetxt('liapunov_r_Rössler.txt', L_exp)
-
-    k = np.arange(0, 30)
-    dk = L_exp[:30]
-
-    slope, intercept, r_value, p_value, std_err = stats.linregress(k[:5], dk[: 5])
-    line = slope * k[:5]
-    print(slope)
-
-    plt.plot(k[:5], line)
-
-
-    plt.plot(L_exp[:30])
-    plt.show()

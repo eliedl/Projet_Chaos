@@ -66,11 +66,11 @@ class Projet_UI(QtWidgets.QWidget):
         self.simulationsFig.ax2.set_xlabel('$r$')
         self.simulationsFig.ax2.set_ylabel("$r\ '$")
 
-        self.simulationsFig.ax3.set_xlabel('Temps')
-        self.simulationsFig.ax3.set_ylabel('Correlation')
+        self.simulationsFig.ax3.set_xlabel('Temps [s]')
+        self.simulationsFig.ax3.set_ylabel(r'$\theta\ [\deg]$')
 
         self.simulationsFig.ax4.set_ylabel("$|\ r - r'\ |$")
-        self.simulationsFig.ax4.set_xlabel('Temps')
+        self.simulationsFig.ax4.set_xlabel('Temps [s]')
 
         renderer = self.simulationsFig.get_renderer()
         self.simulationsFig.ax2.draw(renderer)
@@ -321,11 +321,11 @@ class MyMplCanvas(FigureCanvas):
         self.ax2.set_xlabel('$r$')
         self.ax2.set_ylabel("$r\ '$")
 
-        self.ax3.set_xlabel('Temps')
-        self.ax3.set_ylabel('Correlation')
+        self.ax3.set_xlabel('Temps [s]')
+        self.ax3.set_ylabel(r'$\theta\ [\degree]$')
 
         self.ax4.set_ylabel("$|\ r - r'\ |$")
-        self.ax4.set_xlabel('Temps')
+        self.ax4.set_xlabel('Temps [s]')
 
         self.ax1.view_init(elev=15)
 

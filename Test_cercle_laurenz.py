@@ -82,26 +82,6 @@ def points_in_circle(mat, centre, rayon, epaisseur):
 
         return thresh_matrix
 
-def cube_corners(centre, arrete):
-    coin_1 = [centre[0]-arrete, centre[1] - arrete, centre[2] +arrete]
-
-    coin_2 = [centre[0]-arrete, centre[1] - arrete, centre[2] -arrete]
-
-    coin_3 = [centre[0]-arrete, centre[1] + arrete, centre[2] +arrete]
-
-    coin_4 = [centre[0]-arrete, centre[1] + arrete, centre[2] -arrete]
-
-    coin_5 = [centre[0]+arrete, centre[1] - arrete, centre[2] +arrete]
-
-    coin_6 = [centre[0]+arrete, centre[1] - arrete, centre[2] -arrete]
-
-    coin_7 = [centre[0]+arrete, centre[1] + arrete, centre[2] +arrete]
-
-    coin_8 = [centre[0]+arrete, centre[1] + arrete, centre[2] -arrete]
-
-    return [[coin_1], [coin_2], [coin_3], [coin_4], [coin_5], [coin_6], [coin_7], [coin_8]]
-
-
 def init():
     for pt in pts:
         pt.set_data([], [])
@@ -172,8 +152,6 @@ if __name__ == "__main__":
     for i in range(0, valid_matrix.shape[0]):
         point = [valid_matrix[i,0],valid_matrix[i,1],valid_matrix[i,2]]
         liste_ind.append(np.where(sol == point)[0])
-        #lasol = generate_data(point,t)
-        #liste_sols.append(lasol)
 
         pourcen = 10*i//valid_matrix.shape[0]
         if (pourcen != last):
@@ -182,7 +160,7 @@ if __name__ == "__main__":
 
 
     pts = sum([ax.plot([], [], [], 'ro', markersize = 1)for i in range(0,valid_matrix.shape[0])], [])
-    #truc = ax.plot(0,0,0)
+
 
     ax.set_xlim((-25, 25))
     ax.set_ylim((-35, 35))
