@@ -83,13 +83,13 @@ if __name__ == "__main__":
         pos = [initial_values[i,0], initial_values[i,1], initial_values[i,2]]
         Y = pos[1]
         Z = pos[2]
-        lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(0,Z)))
-        liapunov = max([lam1, lam2, lam3])
+        #lam1, lam2, lam3 = np.linalg.eigvals(np.array(lam_mat(0,Z)))
+        #liapunov = max([lam1, lam2, lam3])
         #if liapunov < 0:
         #print(lam1," ",lam2, " ",lam3)
 
-        #lam3 = (-(sigma+1) + np.sqrt((rho + sigma - Z)**2 + (sigma+1)**2))/2
-        #liapunov = lam3
+        lam3 = (-(sigma+1) + np.sqrt((rho + sigma - Z)**2 + (sigma+1)**2))/2
+        liapunov = lam3
 
         threshhold = liapunov
         #if threshhold > 100:
@@ -110,6 +110,10 @@ if __name__ == "__main__":
     np.savetxt("last_liapunov_2d", thresh_matrix)
 
     p =ax.scatter(xs,zs, c=c, cmap='plasma', marker = 'o')
-    fig.colorbar(p)
+    h = fig.colorbar(p)
+    h.set_label(r'$\lambda_3 (z)$')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Z')
+
     plt.show()
 

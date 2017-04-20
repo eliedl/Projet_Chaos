@@ -35,6 +35,13 @@ class Core:
         dldt = [x*y - x**2, -sigma*x**2 + sigma*z, -y*z + x**2 - rho*z]
         return dldt
 
+    @staticmethod
+    def  fabinovich_fabrikant(l, t, sigma, rho, beta):
+        x, y, z = l
+
+        dldt = [y*(z - 1 + x**2) + rho*x, x*(3*z + 1 - x**2) + rho*y, -2*z*(sigma + x*y)]
+        return dldt
+
 
     def solve_edo(self):
         if self.attractor == 'Lorenz':
@@ -43,6 +50,8 @@ class Core:
             func = self.roessler
         elif self.attractor == 'Unknown':
             func = self.unknown
+        elif self.attractor == 'Fabinovich-Fabrikant':
+            func = self.fabinovich_fabrikant
 
         for i in range(np.shape(self.coordinates)[0]):
 
@@ -58,44 +67,44 @@ class Core:
 
 if __name__ == '__main__':
     core_1 = Core()
-    core_1.coordinates = np.array([[1, 1, 1], [1.05, 1+1e-1, 1+1e-1]])
-    core_1.attractor = 'Lorenz'
-    core_1.params = np.array([[10, 28, 8/3]])
-    core_1.t = np.linspace(1, 100, 10001)
+    core_1.coordinates = np.array([[0.1, 0.1, 0.1]])
+    core_1.attractor = 'Fabinovich-Fabrikant'
+    core_1.params = np.array([[ 0.1, 0.2715, 8/3]])
+    core_1.t = np.linspace(1, 100, 100001)
     core_1.solve_edo()
 
     print(np.shape(core_1.t))
     print(np.shape(core_1.time_series))
-    #mpl.rcParams['legend.fontsize'] = 10
-    #fig = plt.figure()
-    #ax = fig.gca(projection='3d')
-    #x = core_1.time_series[:, 0]
+    mpl.rcParams['legend.fontsize'] = 10
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    x = core_1.time_series[:, 0]
     #y = core_1.time_series[:, 1]
     #z = core_1.time_series[:, 2]
 
-    x = core_1.time_series[65:, 0]
-    x_i = core_1.time_series[65:, 3]
+    #x = core_1.time_series[65:, 0]
+    #x_i = core_1.time_series[65:, 3]
     y = core_1.time_series[:, 1]
     z = core_1.time_series[:, 2]
 
 
 
-    plt.subplot(211)
-    plt.plot(core_1.t[65:], x, lw = 0.3)
-    plt.axvline(15.15, color='r', lw= 0.3)
-    plt.text(5, 10, 'Changement de feuillet', fontsize= 8)
-    plt.xlim([0, 40])
-    plt.ylabel('$x(t)$')
-    plt.xlabel('Temps')
-    plt.subplot(212)
-    plt.plot(core_1.t[65:], x_i, lw = 0.3)
-    plt.axvline(15, color='r', lw= 0.3)
-    plt.xlim([0, 40])
-    plt.ylabel('$x(t)$')
-    plt.xlabel('Temps')
-    plt.tight_layout()
-    #ax.plot(x, y, z, label='Lorentz attractor', marker = '.', markersize = 2, ls='none')
-    #ax.legend()
+    #plt.subplot(211)
+    #plt.plot(core_1.t[65:], x, lw = 0.3)
+    #plt.axvline(15.15, color='r', lw= 0.3)
+    #plt.text(5, 10, 'Changement de feuillet', fontsize= 8)
+    #plt.xlim([0, 40])
+    #plt.ylabel('$x(t)$')
+    #plt.xlabel('Temps')
+    #plt.subplot(212)
+    #plt.plot(core_1.t[65:], x_i, lw = 0.3)
+    #plt.axvline(15, color='r', lw= 0.3)
+    #plt.xlim([0, 40])
+    #plt.ylabel('$x(t)$')
+    #plt.xlabel('Temps')
+    #plt.tight_layout()
+    ax.plot(x, y, z, label='Lorentz attractor', marker = '.', ls= 'none')
+    ax.legend()
     plt.show()
 
     #plt.plot(core_1.t, r)

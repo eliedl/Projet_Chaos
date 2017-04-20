@@ -25,17 +25,18 @@ def calculate_liapunov(time_series, eps):
 
     return result
 
-
 if __name__ == '__main__':
     core = Core()
     core.coordinates = np.array([[1, 1, 1], [1.+1e-1, 1+1e-1, 1+1e-1]])
-    core.attractor = 'Lorenz'
-    core.params = np.array([[10, 28, 8/3]])
+    core.attractor = 'Rössler'
+    core.params = np.array([[0.2, 0.2, 14]])
     core.t = np.linspace(1, 100, 10001)
     core.solve_edo()
 
-    L_exp = calculate_liapunov(core.time_series[:, 0], 0.00001)
-    np.savetxt('liapunov.txt', L_exp)
+    r = np.sqrt(core.time_series[:, 0]**2 + core.time_series[:, 1]**2 + core.time_series[:, 2]**2)
+
+    L_exp = calculate_liapunov(r, 0.00001)
+    np.savetxt('liapunov_r_Rössler.txt', L_exp)
 
     k = np.arange(0, 30)
     dk = L_exp[:30]
