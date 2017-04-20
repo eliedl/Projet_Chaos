@@ -26,7 +26,10 @@ def generate_data(x,y,z):
 
     return ssol, ssol_1
 
+#Génère l'animation 3d de l'évolution des conditions initiales
 def animate3d(fig, axes, matrix1,matrix2):
+
+    #On initialise les composantes x y z des deux trajectoires
     sol = matrix1
     sol_1 = matrix2
 
@@ -51,6 +54,7 @@ def animate3d(fig, axes, matrix1,matrix2):
     trainee, = axes.plot([],[], lw=1, color ='blue')
     trainee_1, = axes.plot([],[], lw=1, color ='red')
 
+    #Fonction qui construit la "frame", retourne une image pour un certain temps "step" donné.
     def ani(step):
         i = 3*step
 
@@ -75,11 +79,11 @@ def animate3d(fig, axes, matrix1,matrix2):
 
 
 if __name__ == "__main__":
-
+    #On initialise la figure et génère les trajectoires
     fig = plt.figure(figsize = (5,5))
     ssol, garbage = generate_data(1,1,1)
-
     axes = p3.Axes3D(fig)
+
     tf1 = 1500
     temps_f=tf1
     temps_i = 0
